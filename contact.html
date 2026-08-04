@@ -5,77 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Capital Africa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --teal: #123F46; --teal-dark: #0d2e33; --warm-white: #F8F7F2; --white: #FFFFFF;
-      --sandstone: #E7E0D3; --olive: #6F7D54; --copper: #C66A32; --charcoal: #263235; --muted: #687476;
-      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08); --radius: 8px;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1140px, 92%); margin: 0 auto; }
-    .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
-    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
-    .btn { display: inline-flex; padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; }
-    .btn-copper { background: var(--copper); color: white; }
-    .btn-teal { background: var(--teal); color: white; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
-    section { padding: 4.5rem 0; }
-    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
-    .page-hero { background: var(--teal); color: white; padding: 4rem 0; }
-    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
-    .contact-info h3 { color: var(--teal); margin-bottom: 0.75rem; margin-top: 1.75rem; }
-    .contact-info p, .contact-info li { color: var(--muted); font-size: 0.95rem; }
-    .contact-info ul { list-style: none; margin-top: 0.5rem; }
-    .contact-info li { margin-bottom: 0.4rem; }
-    .form-card { background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; color: var(--charcoal); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(18,63,70,0.15); border-radius: 6px;
-      font-family: inherit; font-size: 0.95rem; background: var(--warm-white); color: var(--charcoal);
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--teal); background: white;
-    }
-    .form-group textarea { min-height: 130px; resize: vertical; }
-    footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem; font-size: 0.9rem; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
-    .footer-brand { color: white; font-weight: 700; font-size: 1.15rem; }
-    .footer-brand span { display: block; font-weight: 400; font-size: 0.85rem; opacity: 0.7; }
-    footer h4 { color: white; font-size: 0.9rem; margin-bottom: 0.9rem; }
-    footer ul { list-style: none; }
-    footer li { margin-bottom: 0.45rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
-    @media (max-width: 900px) {
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
-      .nav-links.open { display: flex; }
-      .hamburger { display: flex; }
-      .contact-grid, .footer-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav">
+   <header class="nav">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">Capital Africa<span>Nature-Based Investments</span></a>
+        <a href="index.html" class="logo">
+  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+  <div class="logo-text">
+    Capital Africa
+    <span>Nature-Based Investments</span>
+  </div>
+</a>
       <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="approach.html">Investment Approach</a></li>
+        <li><a href="approach.html">Approach</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="koromi.html">Koromi</a></li>
         <li><a href="partnerships.html">Partnerships</a></li>
         <li><a href="impact.html">Impact</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 

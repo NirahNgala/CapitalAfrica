@@ -6,61 +6,9 @@
   <title>Investment Approach | Capital Africa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Same CSS variables + base styles as About page */
-    :root {
-      --teal: #123F46; --teal-dark: #0d2e33; --warm-white: #F8F7F2; --white: #FFFFFF;
-      --sandstone: #E7E0D3; --olive: #6F7D54; --copper: #C66A32; --charcoal: #263235; --muted: #687476;
-      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08); --radius: 8px;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1140px, 92%); margin: 0 auto; }
-    .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
-    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
-    .btn { display: inline-flex; padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; }
-    .btn-copper { background: var(--copper); color: white; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
-    section { padding: 4.5rem 0; }
-    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
-    .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
-    .page-hero { background: var(--teal); color: white; padding: 4rem 0; }
-    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
-    .process-steps { display: grid; gap: 1.25rem; }
-    .step { display: grid; grid-template-columns: 70px 1fr; gap: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); }
-    .step-num { width: 50px; height: 50px; background: var(--teal); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
-    .step h3 { color: var(--teal); margin-bottom: 0.4rem; }
-    .step p { color: var(--muted); font-size: 0.95rem; }
-    .process-flow { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; background: var(--sandstone); padding: 1.75rem; border-radius: var(--radius); margin: 2.5rem 0; font-size: 0.9rem; font-weight: 600; color: var(--teal); text-align: center; }
-    .process-flow span { background: var(--white); padding: 0.5rem 0.9rem; border-radius: 4px; }
-    .revenue-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-    .revenue-table th, .revenue-table td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid rgba(18,63,70,0.08); }
-    .revenue-table th { background: var(--teal); color: white; font-weight: 600; }
-    .revenue-table tr:last-child td { border-bottom: none; }
-    footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem; font-size: 0.9rem; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
-    .footer-brand { color: white; font-weight: 700; font-size: 1.15rem; }
-    .footer-brand span { display: block; font-weight: 400; font-size: 0.85rem; opacity: 0.7; }
-    footer h4 { color: white; font-size: 0.9rem; margin-bottom: 0.9rem; }
-    footer ul { list-style: none; }
-    footer li { margin-bottom: 0.45rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
-    @media (max-width: 900px) {
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
-      .nav-links.open { display: flex; }
-      .hamburger { display: flex; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .step { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
 <body>
-   <header class="nav">
+     <header class="nav">
     <div class="container nav-inner">
         <a href="index.html" class="logo">
   <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
@@ -70,8 +18,9 @@
   </div>
 </a>
       <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="approach.html">Investment Approach</a></li>
+        <li><a href="approach.html" class="active">Approach</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="koromi.html">Koromi</a></li>
         <li><a href="partnerships.html">Partnerships</a></li>

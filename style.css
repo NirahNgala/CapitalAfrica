@@ -25,7 +25,15 @@
     .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
     .btn { display: inline-flex; padding: 0.7rem 1.4rem; border-radius: 26px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; }
     .btn-copper { background: var(--copper); color: white; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+    .hamburger {
+       display: none;
+        flex-direction: column; 
+        gap: 5px; 
+        background: none; 
+        border: none; 
+        cursor: pointer;
+        align-items:right;
+       }
     .hamburger span { width: 22px; height: 2px; background: var(--teal); }
     section { padding: 4.5rem 0; }
     .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }

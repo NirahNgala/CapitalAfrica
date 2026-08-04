@@ -31,16 +31,6 @@
     .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
     .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
     /* ========== PAGE HERO WITH IMAGE ========== */
-.page-hero {
-  position: relative;
-  background-color: var(--teal);          /* fallback */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-  padding: 5rem 0;
-  overflow: hidden;
-}
 
 /* Dark overlay so white text stays readable */
 .page-hero::before {

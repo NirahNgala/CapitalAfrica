@@ -582,33 +582,36 @@
   </style>
 </head>-->
 <body>
-
-  <!-- NAV -->
   <header class="nav">
-    <div class="container nav-inner">
-        <a href="index.html" class="logo">
-  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
-  <div class="logo-text">
-    Capital Africa
-    <span>Nature-Based Investments</span>
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+      <div class="logo-text">
+        Capital Africa
+        <span>Nature-Based Investments</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="approach.html">Approach</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="koromi.html">Koromi</a></li>
+      <li><a href="partnerships.html">Partnerships</a></li>
+      <li><a href="impact.html">Impact</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <a href="contact.html" class="btn btn-copper">Partner With Us</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
-</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="approach.html">Approach</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="koromi.html">Koromi</a></li>
-        <li><a href="partnerships.html">Partnerships</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+</header>
 
   <!-- PARALLAX HERO -->
   <section class="hero">
@@ -828,14 +831,23 @@
   </footer>
 
   <script>
-    // Mobile menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
+   const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
 
+hamburger.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+// Optional: close menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
     // ===== PARALLAX =====
     const heroParallax = document.getElementById('heroParallax');
     const statsParallax = document.getElementById('statsParallax');
@@ -890,6 +902,5 @@
     });
   })();
 </script>
-
 </body>
 </html>

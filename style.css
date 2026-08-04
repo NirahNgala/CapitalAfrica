@@ -20,26 +20,174 @@
     .container { width: min(1140px, 92%); margin: 0 auto; }
     .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
-    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
-    .btn { display: inline-flex; padding: 0.7rem 1.4rem; border-radius: 26px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; }
-    .btn-copper { background: var(--copper); color: white; }
-    .hamburger {
-       display: none;
-        flex-direction: column; 
-        gap: 5px; 
-        background: none; 
-        border: none; 
-        cursor: pointer;
-        align-items:right;
-       }
-    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
-    section { padding: 4.5rem 0; }
-    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
-    .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
-    /* ========== PAGE HERO WITH IMAGE ========== */
+    /* ===== Logo ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;               /* prevents logo from shrinking too much */
+}
 
+.logo-img {
+  height: 42px;                 /* adjust if needed */
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.15rem;           /* slightly smaller than before */
+  color: var(--teal);
+  white-space: nowrap;          /* keeps "Capital Africa" on one line */
+}
+
+.logo-text span {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.75rem;           /* smaller tagline */
+  letter-spacing: 0.02em;
+}
+
+/* ===== Nav ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-bottom: 1px solid rgba(18, 63, 70, 0.08);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 1rem;
+}
+
+/* Desktop links */
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+/* Partner button (desktop) */
+.btn {
+  display: inline-flex;
+  padding: 0.7rem 1.4rem;
+  border-radius: 26px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-copper {
+  background: var(--copper);
+  color: white;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;  
+  align-items: right;   
+  justify-content: right;           /* above the menu */
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--teal);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Hamburger → X animation */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;                   /* opens from the right */
+    height: 100vh;
+    width: min(320px, 85vw);
+    background: var(--white);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 6rem 2rem 2rem;
+    gap: 1.5rem;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
+    transform: translateX(100%); /* hidden off-screen to the right */
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);   /* slide in from right */
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 0.4rem 0;
+  }
+
+  .btn-copper {
+    display: none;              /* hide desktop CTA on mobile (or move it inside the menu if you prefer) */
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Logo text scaling on very small screens */
+  .logo-text {
+    font-size: 1rem;
+  }
+  .logo-text span {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+  .logo-text {
+    font-size: 0.95rem;
+  }
+  .logo-img {
+    height: 36px;
+  }
+}
 .page-hero {
   /* ★ these three lines fix the black strip ★ */
   background-size: cover;

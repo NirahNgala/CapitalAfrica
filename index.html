@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital Africa | Nature-Based Investments</title>
+  <meta name="description" content="Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects in East Africa.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #123F46;
+      --teal-dark: #0d2e33;
+      --warm-white: #F8F7F2;
+      --white: #FFFFFF;
+      --sandstone: #E7E0D3;
+      --olive: #6F7D54;
+      --copper: #C66A32;
+      --charcoal: #263235;
+      --muted: #687476;
+      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08);
+      --radius: 8px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1140px, 92%); margin: 0 auto; }
+
+    /* ========== NAV ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(18, 63, 70, 0.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 1.5rem;
+    }
+   .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;                  /* space between logo and text */
+  text-decoration: none;
+  color: var(--teal);
+}
+
+.logo-img {
+  height: 42px;               /* adjust size if needed */
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 14px;          /* optional: rounded corners */
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.logo-text span {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+/* Optional: smaller on mobile */
+@media (max-width: 600px) {
+  .logo-img {
+    height: 36px;
+  }
+  .logo-text {
+    font-size: 1.05rem;
+  }
+  .logo-text span {
+    font-size: 0.72rem;
+  }
+}
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-copper { background: var(--copper); color: white; }
+    .btn-copper:hover { background: #b55a28; transform: translateY(-1px); }
+    .btn-teal { background: var(--teal); color: white; }
+    .btn-teal:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--teal);
+      display: block;
+    }
+
+    /* ========== PARALLAX HERO ========== */
+    .hero {
+      position: relative;
+      height: 85vh;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-parallax {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=85') center/cover no-repeat;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(18,63,70,0.88) 0%, rgba(18,63,70,0.55) 55%, rgba(18,63,70,0.35) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      color: white;
+      padding: 2rem 0;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      line-height: 1.65;
+      max-width: 540px;
+    }
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-secondary {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+    .hero-secondary a {
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      transition: border-color 0.2s;
+    }
+    .hero-secondary a:hover { border-color: white; }
+
+    /* ========== INTRO ========== */
+    .intro {
+      padding: 3.5rem 0 2.5rem;
+      text-align: center;
+    }
+    .intro p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ========== STATS (subtle parallax band) ========== */
+    .stats {
+      position: relative;
+      padding: 3rem 0;
+      overflow: hidden;
+      background: var(--sandstone);
+    }
+    .stats-parallax {
+      position: absolute;
+      inset: -40px 0;
+      background: linear-gradient(rgba(231,224,211,0.92), rgba(231,224,211,0.92)),
+                  url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=70') center/cover;
+      will-change: transform;
+      opacity: 0.25;
+    }
+    .stats-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 4.5rem 0; }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .pillar-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(18,63,70,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pillar-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(18,63,70,0.12);
+    }
+    .pillar-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(18,63,70,0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .pillar-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .theme-chip {
+      background: var(--white);
+      border: 1px solid rgba(18,63,70,0.1);
+      border-left: 4px solid var(--olive);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .theme-chip:hover {
+      border-left-color: var(--copper);
+      background: rgba(198,106,50,0.04);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(18,63,70,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+    .project-img {
+      height: 180px;
+      background: var(--sandstone);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .stage-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .stage-operational { background: var(--copper); color: white; }
+    .stage-development { background: var(--teal); color: white; }
+    .stage-pipeline { background: var(--muted); color: white; }
+    .project-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-body h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+    .project-location {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .project-body p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex: 1;
+      margin-bottom: 1.1rem;
+    }
+    .project-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--copper);
+    }
+    .projects-note {
+      margin-top: 1.75rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2.5rem;
+    }
+    .why-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+    }
+    .why-check {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: rgba(18,63,70,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .cta-banner {
+      background: var(--teal);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+    .cta-banner p {
+      max-width: 620px;
+      margin: 0 auto 1.75rem;
+      opacity: 0.92;
+      font-size: 1.05rem;
+    }
+
+    footer {
+      background: var(--teal-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 3rem 0 2rem;
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-brand {
+      color: white;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+    .footer-brand span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 0.2rem;
+    }
+    footer h4 {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+    }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 0.45rem; }
+    footer a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1.25rem 1.5rem 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(18,63,70,0.1);
+      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .themes-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .pillars { grid-template-columns: 1fr; }
+      .themes-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .btn { width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero { height: 75vh; min-height: 500px; }
+    }
+
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-parallax, .stats-parallax {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+        <a href="index.html" class="logo">
+  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+  <div class="logo-text">
+    Capital Africa
+    <span>Nature-Based Investments</span>
+  </div>
+</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="approach.html">Investment Approach</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="koromi.html">Koromi</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PARALLAX HERO -->
+  <section class="hero">
+    <div class="hero-parallax" id="heroParallax"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>Building Investable Natural Capital Projects in East Africa</h1>
+        <p>Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects. We work with landowners, communities, public institutions, carbon developers and investors to create projects that combine environmental restoration with long-term commercial value.</p>
+        <div class="hero-btns">
+          <a href="projects.html" class="btn btn-teal">View Our Projects</a>
+          <a href="contact.html" class="btn btn-copper">Partner With Us</a>
+        </div>
+        <p class="hero-secondary"><a href="koromi.html">Explore Koromi Farm →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container">
+      <p>Capital Africa is a Kenya-based natural capital project developer and operating partner. We transform suitable land opportunities into investable projects by combining local implementation capacity, long-term land partnerships, technical expertise, carbon development and disciplined commercial structures. Koromi Farm provides the operational evidence behind our larger project-development platform.</p>
+    </div>
+  </section>
+
+  <!-- STATS with subtle parallax -->
+  <div class="stats">
+    <div class="stats-parallax" id="statsParallax"></div>
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">2017</div>
+          <div class="stat-label">Established in Kenya</div>
+        </div>
+        <div>
+          <div class="stat-number">2019</div>
+          <div class="stat-label">Dryland forestry since</div>
+        </div>
+        <div>
+          <div class="stat-number">60,000+</div>
+          <div class="stat-label">Trees established</div>
+        </div>
+        <div>
+          <div class="stat-number">60+</div>
+          <div class="stat-label">Tree species</div>
+        </div>
+        <div>
+          <div class="stat-number">250+</div>
+          <div class="stat-label">Bird species recorded</div>
+        </div>
+        <div>
+          <div class="stat-number">~100 ha</div>
+          <div class="stat-label">Proof-of-concept landscape</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DO -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">What We Do</h2>
+      <p class="section-sub">From land opportunity to long-term natural capital asset.</p>
+      <div class="pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon">1</div>
+          <h3>Project Origination</h3>
+          <p>We identify combinations of land, landowners, ecology, species, markets and financing that can support credible natural capital projects.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">2</div>
+          <h3>Project Development</h3>
+          <p>Feasibility work, technical design, carbon screening, financial modelling, stakeholder agreements and investment preparation.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">3</div>
+          <h3>Implementation & Operations</h3>
+          <p>Nursery production, land preparation, planting, maintenance, monitoring, logistics and long-term local management.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">4</div>
+          <h3>Natural Capital Value Creation</h3>
+          <p>Multiple revenue streams including sustainable timber, carbon, biodiversity, agroforestry, honey and other compatible products.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section style="background: var(--white); padding-top: 2rem;">
+    <div class="container">
+      <h2 class="section-title">Investment Themes</h2>
+      <p class="section-sub">Focused on commercially viable and ecologically suitable systems.</p>
+      <div class="themes-grid">
+        <div class="theme-chip">Commercial dryland forestry</div>
+        <div class="theme-chip">Afforestation, reforestation & carbon removals</div>
+        <div class="theme-chip">Assisted natural regeneration & indigenous woodland restoration</div>
+        <div class="theme-chip">Biodiversity and habitat recovery</div>
+        <div class="theme-chip">Agroforestry and resilient perennial crops</div>
+        <div class="theme-chip">Integrated landscape projects with multiple revenue streams</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Projects by Development Stage</h2>
+      <p class="section-sub">Operational assets, projects in formal development, and early-stage pipeline opportunities.</p>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Koromi Farm">
+            <span class="stage-badge stage-operational">Operational</span>
+          </div>
+          <div class="project-body">
+            <h3>Koromi Farm</h3>
+            <div class="project-location">Kilifi County, coastal Kenya</div>
+            <p>Dryland forestry, biodiversity and land-management site used to test commercial forestry, restoration, nursery systems and operational approaches.</p>
+            <a href="koromi.html" class="project-link">Explore Koromi →</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="SEKU">
+            <span class="stage-badge stage-development">In Development</span>
+          </div>
+          <div class="project-body">
+            <h3>SEKU Natural Capital Partnership</h3>
+            <div class="project-location">South-eastern Kenya</div>
+            <p>Proposed long-term institutional land partnership combining dryland commercial forestry, carbon, agroforestry and restoration.</p>
+            <a href="contact.html" class="project-link">Discuss this project →</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" alt="Pipeline">
+            <span class="stage-badge stage-pipeline">Pipeline</span>
+          </div>
+          <div class="project-body">
+            <h3>Institutional Land & Restoration Pipeline</h3>
+            <div class="project-location">Kenya – coastal & ASAL landscapes</div>
+            <p>Pipeline of potential partnerships with universities, public institutions and large landowners.</p>
+            <a href="contact.html" class="project-link">Learn more →</a>
+          </div>
+        </article>
+      </div>
+      <p class="projects-note">Detailed project information is available to qualified partners following an introductory discussion and, where appropriate, a confidentiality agreement.</p>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section style="background: var(--sandstone);">
+    <div class="container">
+      <h2 class="section-title">Why Capital Africa</h2>
+      <p class="section-sub">Project-development capability combined with practical operating experience.</p>
+      <div class="why-grid">
+        <div class="why-item"><div class="why-check">✓</div><span>Established operating presence in Kenya</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Own dryland forestry proof-of-concept site</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Access to large-scale nursery and propagation capacity</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Local implementation and management teams</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Experience combining commercial forestry with ecological restoration</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>International ownership and investor-facing governance</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Partnerships with public institutions and technical specialists</span></div>
+        <div class="why-item"><div class="why-check">✓</div><span>Long-term commitment across multiple forestry rotations</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Do you control land, capital, carbon expertise or market access?</h2>
+      <p>Capital Africa works with institutional landowners, carbon developers, forestry investors, universities, government agencies and impact investors to develop scalable natural capital projects in East Africa.</p>
+      <a href="contact.html" class="btn btn-copper">Discuss a Partnership</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Capital Africa<span>Nature-Based Investments</span></div>
+          <p style="margin-top:0.75rem; max-width:280px;">Developing investable forestry, carbon and biodiversity projects in East Africa.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="koromi.html">Koromi</a></li>
+            <li><a href="impact.html">Impact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="contact.html">Partner With Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Kenya operating presence</li>
+            <li>Treasure Trees BV (Netherlands)</li>
+            <li><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Capital Africa Agribusiness Ventures Ltd</span>
+        <span>All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // ===== PARALLAX =====
+    const heroParallax = document.getElementById('heroParallax');
+    const statsParallax = document.getElementById('statsParallax');
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+
+      // Hero parallax (moves slower than scroll)
+      if (heroParallax) {
+        const heroSpeed = 0.35; // lower = more subtle
+        heroParallax.style.transform = `translate3d(0, ${scrollY * heroSpeed}px, 0)`;
+      }
+
+      // Stats band parallax
+      if (statsParallax) {
+        const statsSection = statsParallax.parentElement;
+        const rect = statsSection.getBoundingClientRect();
+        const offset = (window.innerHeight - rect.top) * 0.12;
+        statsParallax.style.transform = `translate3d(0, ${offset}px, 0)`;
+      }
+    }
+
+    // Use requestAnimationFrame for smooth performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial call
+    updateParallax();
+  </script>
+</body>
+</html>

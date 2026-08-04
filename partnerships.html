@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partnerships | Capital Africa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #123F46; --teal-dark: #0d2e33; --warm-white: #F8F7F2; --white: #FFFFFF;
+      --sandstone: #E7E0D3; --olive: #6F7D54; --copper: #C66A32; --charcoal: #263235; --muted: #687476;
+      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08); --radius: 8px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1140px, 92%); margin: 0 auto; }
+    .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
+    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
+    .btn { display: inline-flex; padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; }
+    .btn-copper { background: var(--copper); color: white; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
+    section { padding: 4.5rem 0; }
+    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
+    .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 620px; }
+    .page-hero { background: var(--teal); color: white; padding: 4rem 0; }
+    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
+    .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .partner-card { background: var(--white); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); border-top: 4px solid var(--teal); }
+    .partner-card h3 { color: var(--teal); font-size: 1.15rem; margin-bottom: 0.6rem; }
+    .partner-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .partner-card ul { list-style: none; }
+    .partner-card li { position: relative; padding-left: 1.2rem; margin-bottom: 0.45rem; font-size: 0.92rem; color: var(--charcoal); }
+    .partner-card li::before { content: "→"; position: absolute; left: 0; color: var(--copper); font-weight: 600; }
+    footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem; font-size: 0.9rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+    .footer-brand { color: white; font-weight: 700; font-size: 1.15rem; }
+    .footer-brand span { display: block; font-weight: 400; font-size: 0.85rem; opacity: 0.7; }
+    footer h4 { color: white; font-size: 0.9rem; margin-bottom: 0.9rem; }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 0.45rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .partner-grid, .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Capital Africa<span>Nature-Based Investments</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="approach.html">Investment Approach</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="koromi.html">Koromi</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Partnerships</h1>
+      <p>Capital Africa’s role is to combine the contributions of landowners, investors, carbon specialists, technical institutions, government agencies and communities into projects with clear responsibilities and long-term commercial discipline.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Who We Partner With</h2>
+      <p class="section-sub">Each partner type brings a distinct contribution. We structure clear roles, responsibilities and benefit-sharing from the outset.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <h3>Institutional Landowners</h3>
+          <p>Universities, public institutions, development authorities, churches, trusts and private estates that control suitable land but may lack finance or operating capacity.</p>
+          <ul>
+            <li>Land-use concept and feasibility development</li>
+            <li>Long-term development and revenue-sharing agreements</li>
+            <li>Investment mobilisation</li>
+            <li>Project implementation and management</li>
+            <li>Improvement of the productive and environmental value of the land</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <h3>Carbon Developers & Credit Buyers</h3>
+          <p>Capital Africa provides the local origination, operating and land-partnership platform needed to develop credible projects.</p>
+          <ul>
+            <li>Access to land and counterparties</li>
+            <li>Field implementation and monitoring</li>
+            <li>Nursery and planting capacity</li>
+            <li>Stakeholder engagement</li>
+            <li>Long-term local management</li>
+            <li>Transparent benefit-sharing administration</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <h3>Impact & Natural Capital Investors</h3>
+          <p>A pipeline of projects that combine commercial outputs with measurable environmental and social outcomes.</p>
+          <ul>
+            <li>Investment-ready project development</li>
+            <li>Local implementation platform</li>
+            <li>Technical and commercial structuring</li>
+            <li>Governance and reporting</li>
+            <li>Long-term asset management</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <h3>Universities & Research Institutions</h3>
+          <p>Research partnerships strengthen species selection, silviculture, carbon accounting, biodiversity monitoring and land-management innovation.</p>
+          <ul>
+            <li>Applied field trials</li>
+            <li>Student and researcher engagement</li>
+            <li>Monitoring and data systems</li>
+            <li>Joint funding proposals</li>
+            <li>Demonstration and training sites</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <h3>Government Agencies & Public Authorities</h3>
+          <p>Public-sector partners can provide land, policy alignment, technical mandates, protection support and links with communities.</p>
+          <ul>
+            <li>Landscape restoration programmes</li>
+            <li>Sustainable forestry partnerships</li>
+            <li>Public-private development structures</li>
+            <li>Technical demonstrations</li>
+            <li>Local economic development</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <h3>Communities & Outgrowers</h3>
+          <p>Communities and landowners are long-term project participants rather than short-term labour sources.</p>
+          <ul>
+            <li>Transparent agreements</li>
+            <li>Employment and contracting</li>
+            <li>Outgrower production</li>
+            <li>Carbon and produce benefit sharing</li>
+            <li>Training and local enterprise opportunities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--sandstone);">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">Ready to explore a partnership?</h2>
+      <p style="color:var(--muted); max-width:560px; margin:0 auto 1.75rem;">Whether you control land, capital, carbon expertise or technical capacity, we welcome serious discussions.</p>
+      <a href="contact.html" class="btn btn-copper">Discuss a Partnership</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Capital Africa<span>Nature-Based Investments</span></div>
+          <p style="margin-top:0.75rem; max-width:280px;">Developing investable forestry, carbon and biodiversity projects in East Africa.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="koromi.html">Koromi</a></li>
+            <li><a href="impact.html">Impact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="contact.html">Partner With Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Kenya operating presence</li>
+            <li>Treasure Trees BV (Netherlands)</li>
+            <li><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Capital Africa Agribusiness Ventures Ltd</span>
+        <span>All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
+</body>
+</html>

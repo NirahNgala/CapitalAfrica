@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Capital Africa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    
+    :root {
+      --teal: #123F46; --teal-dark: #0d2e33; --warm-white: #F8F7F2; --white: #FFFFFF;
+      --sandstone: #E7E0D3; --olive: #6F7D54; --copper: #C66A32; --charcoal: #263235; --muted: #687476;
+      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08); --radius: 8px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1140px, 92%); margin: 0 auto; }
+    .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 1.5rem; }
+    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
+    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; margin-top: -2px; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--teal); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: all 0.2s; }
+    .btn-copper { background: var(--copper); color: white; }
+    .btn-copper:hover { background: #b55a28; }
+    .btn-teal { background: var(--teal); color: white; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
+    section { padding: 4.5rem 0; }
+    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
+    .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
+    .page-hero { background: var(--teal); color: white; padding: 4rem 0; }
+    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
+    .page-hero p { opacity: 0.9; max-width: 580px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .philosophy-list { list-style: none; }
+    .philosophy-list li { padding: 0.9rem 0; border-bottom: 1px solid rgba(18,63,70,0.08); display: flex; gap: 0.9rem; }
+    .philosophy-list li strong { color: var(--teal); min-width: 180px; }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--sandstone); }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 14px; height: 14px; background: var(--copper); border-radius: 50%; border: 3px solid var(--warm-white); }
+    .timeline-year { font-weight: 700; color: var(--teal); font-size: 0.95rem; }
+    .leader-card { background: var(--white); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); margin-bottom: 1.25rem; }
+    .leader-card h3 { color: var(--teal); margin-bottom: 0.25rem; }
+    .leader-role { color: var(--copper); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; }
+    footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem; font-size: 0.9rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+    .footer-brand { color: white; font-weight: 700; font-size: 1.15rem; }
+    .footer-brand span { display: block; font-weight: 400; font-size: 0.85rem; opacity: 0.7; }
+    footer h4 { color: white; font-size: 0.9rem; margin-bottom: 0.9rem; }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 0.45rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .two-col, .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+   <header class="nav">
+    <div class="container nav-inner">
+        <a href="index.html" class="logo">
+  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+  <div class="logo-text">
+    Capital Africa
+    <span>Nature-Based Investments</span>
+  </div>
+</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="approach.html">Investment Approach</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="koromi.html">Koromi</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>About Capital Africa</h1>
+      <p>A Kenya-based developer and operating partner for nature-based investment projects in East Africa.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <h2 class="section-title">Who We Are</h2>
+          <p style="margin-bottom:1.25rem; color:var(--muted);">Capital Africa Agribusiness Ventures Ltd is a Kenya-based developer and operating partner for nature-based investment projects. We originate, structure and manage commercially viable forestry, carbon, biodiversity and regenerative land-use projects in East Africa.</p>
+          <p style="color:var(--muted);">Our work begins with land, ecology and partnership. We identify suitable landscapes and landowners, assess technical and commercial feasibility, structure long-term development agreements and build projects that can attract responsible capital. We then remain involved through implementation, monitoring and long-term asset management.</p>
+        </div>
+        <div>
+          <h2 class="section-title">Mission</h2>
+          <p style="margin-bottom:1.5rem; color:var(--muted);">To develop commercially credible natural capital investments that restore landscapes, strengthen local economies and create long-term environmental and financial value.</p>
+          <h2 class="section-title">Vision</h2>
+          <p style="color:var(--muted);">To become a trusted East African development and operating platform for forestry, carbon, biodiversity and regenerative land-use investments, demonstrating that degraded and underutilised land can be transformed into productive, resilient and investable natural capital assets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--white);">
+    <div class="container">
+      <h2 class="section-title">Development Philosophy</h2>
+      <ul class="philosophy-list">
+        <li><strong>Ecological suitability before scale</strong> Species, planting systems and land uses must fit local soils, rainfall, water availability and biodiversity conditions.</li>
+        <li><strong>Commercial discipline</strong> Projects must have credible markets, realistic costs, transparent financial structures and clear responsibilities.</li>
+        <li><strong>Long-term commitment</strong> Forestry, restoration and carbon projects require patient management and partnerships that extend across decades.</li>
+        <li><strong>Multiple revenue streams</strong> We combine timber, carbon, biodiversity, agroforestry, honey and other compatible revenues to improve resilience.</li>
+        <li><strong>Evidence-based implementation</strong> We test, monitor and improve systems before applying them at larger scale.</li>
+        <li><strong>Strong local partnerships</strong> Landowners, communities, technical institutions and operating partners must share clear responsibilities and benefits.</li>
+        <li><strong>Transparent benefit sharing</strong> Land, carbon, timber and other revenues should be governed by documented and auditable agreements.</li>
+        <li><strong>Local operating capacity</strong> Projects must be supported by people, nurseries, logistics, monitoring systems and management teams on the ground.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Company History</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2017</div>
+          <p>The wider operating platform was established in Kenya to support agribusiness, forestry and nature-based project development.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019</div>
+          <p>Capital Africa began developing Koromi Farm as a practical demonstration of commercial forestry, ecological restoration and biodiversity management under dryland conditions.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019–2023</div>
+          <p>More than 60,000 trees were established, including substantial Melia volkensii planting and more than 60 tree species. Water, nursery and monitoring systems were progressively developed.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024–2026</div>
+          <p>Capital Africa expanded from a single proof-of-concept site toward institutional land partnerships, carbon development, commercial outgrower models and larger natural capital projects.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026 onward</div>
+          <p>The company is developing a pipeline of forestry, carbon, biodiversity and agroforestry partnerships in Kenya and the wider East African region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--sandstone);">
+    <div class="container">
+      <h2 class="section-title">Leadership</h2>
+      <div class="leader-card">
+        <h3>Bob van der Bijl</h3>
+        <div class="leader-role">Founder and Managing Director</div>
+        <p style="color:var(--muted);">Development economist and entrepreneur with extensive experience in African agribusiness, private-sector development and institutional partnerships. Based in Kenya since 2016. Previously Managing Director of the Netherlands-African Business Council. Leads Capital Africa’s project pipeline, institutional land partnerships, carbon collaborations and investment opportunities. Practical forestry experience grounded in the development of Koromi Farm since 2019.</p>
+      </div>
+      <div class="leader-card">
+        <h3>Gavriel Simha</h3>
+        <div class="leader-role">Operations Manager</div>
+        <p style="color:var(--muted);">Hands-on management, production, irrigation and commercial-operating experience. Focuses on operational systems, production planning, infrastructure and logistics.</p>
+      </div>
+      <div class="leader-card">
+        <h3>Marc Parren</h3>
+        <div class="leader-role">Forestry and Reforestation Expert</div>
+        <p style="color:var(--muted);">Specialist support through the Crescendo Green technical platform.</p>
+      </div>
+      <div class="leader-card">
+        <h3>Donald Maringa</h3>
+        <div class="leader-role">Carbon Certification Expert</div>
+        <p style="color:var(--muted);">Carbon development and certification expertise.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Capital Africa<span>Nature-Based Investments</span></div>
+          <p style="margin-top:0.75rem; max-width:280px;">Developing investable forestry, carbon and biodiversity projects in East Africa.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="koromi.html">Koromi</a></li>
+            <li><a href="impact.html">Impact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="contact.html">Partner With Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Kenya operating presence</li>
+            <li>Treasure Trees BV (Netherlands)</li>
+            <li><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Capital Africa Agribusiness Ventures Ltd</span>
+        <span>All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
+</body>
+</html>

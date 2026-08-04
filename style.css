@@ -30,8 +30,78 @@
     section { padding: 4.5rem 0; }
     .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
     .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
-    .page-hero { background: var(--teal); color: white; padding: 4rem 0; }
-    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
+    /* ========== PAGE HERO WITH IMAGE ========== */
+.page-hero {
+  position: relative;
+  background-color: var(--teal);          /* fallback */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+/* Dark overlay so white text stays readable */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(18, 63, 70, 0.88) 0%,
+    rgba(18, 63, 70, 0.65) 55%,
+    rgba(18, 63, 70, 0.5) 100%
+  );
+  z-index: 0;
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.page-hero p {
+  opacity: 0.95;
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* ----- Per-page background images ----- */
+.page-hero--contact {
+  background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80');
+}
+
+.page-hero--about {
+  background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80');
+}
+
+.page-hero--approach {
+  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80');
+}
+
+.page-hero--projects {
+  background-image: url('https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=1600&q=80');
+}
+
+.page-hero--koromi {
+  background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1600&q=80');
+}
+
+.page-hero--partnerships {
+  background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&q=80');
+}
+
+.page-hero--impact {
+  background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&q=80');
+}
     .process-steps { display: grid; gap: 1.25rem; }
     .step { display: grid; grid-template-columns: 70px 1fr; gap: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); }
     .step-num { width: 50px; height: 50px; background: var(--teal); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
@@ -614,3 +684,102 @@
         transform: none !important;
       }
     }
+
+    /* Page hero */
+.page-hero {
+  background: var(--teal);
+  color: white;
+  padding: 4rem 0;
+}
+.page-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.page-hero p {
+  opacity: 0.9;
+  max-width: 640px;
+}
+
+/* Section helpers */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+.section-sub {
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  max-width: 640px;
+}
+section {
+  padding: 4.5rem 0;
+}
+
+/* Partner cards grid (the “table”) */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.partner-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(18, 63, 70, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.partner-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(18, 63, 70, 0.12);
+}
+.partner-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--teal);
+  margin-bottom: 0.6rem;
+}
+.partner-card > p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  line-height: 1.55;
+}
+.partner-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.partner-card li {
+  position: relative;
+  padding: 0.4rem 0 0.4rem 1.15rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  border-top: 1px solid rgba(18, 63, 70, 0.06);
+  line-height: 1.45;
+}
+.partner-card li:first-child {
+  border-top: none;
+}
+.partner-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--copper);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .partner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .partner-grid {
+    grid-template-columns: 1fr;
+  }
+}

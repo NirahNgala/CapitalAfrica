@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impact | Capital Africa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> 
   <style>
     :root {
       --teal: #123F46; --teal-dark: #0d2e33; --warm-white: #F8F7F2; --white: #FFFFFF;
@@ -55,9 +56,15 @@
   </style>
 </head>
 <body>
-  <header class="nav">
+   <header class="nav">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">Capital Africa<span>Nature-Based Investments</span></a>
+        <a href="index.html" class="logo">
+  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+  <div class="logo-text">
+    Capital Africa
+    <span>Nature-Based Investments</span>
+  </div>
+</a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -65,15 +72,17 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="koromi.html">Koromi</a></li>
         <li><a href="partnerships.html">Partnerships</a></li>
-        <li><a href="impact.html">Impact</a></li>
+        <li><a href="impact.html" class="active">Impact</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <section class="page-hero">
+  <section class="page-hero page-hero--impact">
     <div class="container">
       <h1>Impact</h1>
       <p>We distinguish clearly between verified results from existing operations and projected impact from projects under development.</p>

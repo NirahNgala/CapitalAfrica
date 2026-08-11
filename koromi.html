@@ -4,23 +4,240 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koromi Farm | Capital Africa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --teal: #123F46;
+      --teal-dark: #0d2e33;
+      --warm-white: #F8F7F2;
+      --white: #FFFFFF;
+      --sandstone: #E7E0D3;
+      --olive: #6F7D54;
+      --copper: #C66A32;
+      --charcoal: #263235;
+      --muted: #687476;
+      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08);
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    .container { width: min(1140px, 92%); margin: 0 auto; }
+    section { padding: 4.5rem 0; }
+
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+      font-size: 1.05rem;
+    }
+
+    /* ===== Stats Row ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.35s ease;
+      border-bottom: 3px solid transparent;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    .stat-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat-box:hover {
+      transform: translateY(-8px);
+      border-bottom-color: var(--copper);
+      box-shadow: 0 14px 32px rgba(18, 63, 70, 0.12);
+    }
+
+    .stat-box .num {
+      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-box .label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ===== Lessons Grid ===== */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .lesson-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.5rem;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .lesson-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lesson-card:hover,
+    .lesson-card.expanded {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 36px rgba(18, 63, 70, 0.13);
+      border-color: rgba(198, 106, 50, 0.25);
+    }
+
+    .lesson-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--copper);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.35s ease;
+    }
+
+    .lesson-card:hover::before,
+    .lesson-card.expanded::before {
+      transform: scaleY(1);
+    }
+
+    .lesson-card h3 {
+      color: var(--teal);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+
+    .lesson-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin: 0;
+    }
+
+    .lesson-extra {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0;
+    }
+
+    .lesson-card.expanded .lesson-extra {
+      max-height: 180px;
+      opacity: 1;
+      margin-top: 0.85rem;
+    }
+
+    .expand-hint {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--copper);
+      opacity: 0.75;
+    }
+
+    .lesson-card.expanded .expand-hint {
+      display: none;
+    }
+
+    /* ===== Why Koromi block ===== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .why-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--copper);
+      transition: all 0.3s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 32px rgba(18, 63, 70, 0.12);
+    }
+
+    .why-card h3 {
+      color: var(--teal);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .why-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-   <header class="nav">
+
+  <!-- Header (keep yours) -->
+  <header class="nav">
     <div class="container nav-inner">
-        <a href="index.html" class="logo">
-  <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
-  <div class="logo-text">
-    Capital Africa
-    <span>Nature-Based Investments</span>
-  </div>
-</a>
+      <a href="index.html" class="logo">
+        <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+        <div class="logo-text">
+          Capital Africa
+          <span>Nature-Based Investments</span>
+        </div>
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" >About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="approach.html">Approach</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="koromi.html" class="active">Koromi</a></li>
@@ -35,6 +252,7 @@
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="page-hero--koromi">
     <div class="container">
       <h1 style="color: white;">Koromi Farm</h1>
@@ -42,19 +260,40 @@
     </div>
   </section>
 
+  <!-- The Site + Stats -->
   <section>
     <div class="container">
       <h2 class="section-title">The Site</h2>
       <p class="section-sub">Capital Africa began developing Koromi Farm in 2019 as a practical response to a central question: can commercially relevant forestry, biodiversity conservation and ecological restoration be combined under dryland conditions?</p>
-      <p style="color:var(--muted); max-width:720px; margin-bottom:2rem;">The site was developed progressively rather than as a showcase plantation. Capital Africa tested species, planting methods, water systems, nursery quality, spacing, pruning, survival and operational management. This learning function is central to Koromi’s value.</p>
+      <p style="color:var(--muted); max-width:720px; margin-bottom:1rem;">
+        The site was developed progressively rather than as a showcase plantation. Capital Africa tested species, planting methods, water systems, nursery quality, spacing, pruning, survival and operational management. This learning function is central to Koromi’s value.
+      </p>
 
       <div class="stats-row">
-        <div class="stat-box"><div class="num">60,000+</div><div class="label">Trees established</div></div>
-        <div class="stat-box"><div class="num">25,000+</div><div class="label">Melia volkensii</div></div>
-        <div class="stat-box"><div class="num">60+</div><div class="label">Tree species</div></div>
-        <div class="stat-box"><div class="num">250+</div><div class="label">Bird species</div></div>
-        <div class="stat-box"><div class="num">~100 ha</div><div class="label">Managed landscape</div></div>
-        <div class="stat-box"><div class="num">2019</div><div class="label">Development started</div></div>
+        <div class="stat-box">
+          <div class="num" data-target="60000">0</div>
+          <div class="label">Trees established</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" data-target="25000">0</div>
+          <div class="label">Melia volkensii</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" data-target="60">0</div>
+          <div class="label">Tree species</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" data-target="250">0</div>
+          <div class="label">Bird species</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">~100</div>
+          <div class="label">Managed landscape (ha)</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">2019</div>
+          <div class="label">Development started</div>
+        </div>
       </div>
     </div>
   </section>
@@ -105,6 +344,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -145,10 +385,52 @@
   </footer>
 
   <script>
+    // Mobile menu
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+    if (hamburger) {
+      hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+      navLinks.querySelectorAll('a').forEach(link =>
+        link.addEventListener('click', () => navLinks.classList.remove('open'))
+      );
+    }
+
+    // Scroll animations + counter
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Animate counters
+          const numEl = entry.target.querySelector('.num[data-target]');
+          if (numEl) {
+            const target = +numEl.getAttribute('data-target');
+            const duration = 1600;
+            const start = performance.now();
+
+            const update = (now) => {
+              const progress = Math.min((now - start) / duration, 1);
+              const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+              const current = Math.floor(ease * target);
+              numEl.textContent = current.toLocaleString() + (target >= 1000 ? '+' : '');
+              if (progress < 1) requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+          }
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-box, .lesson-card').forEach(el => {
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>

@@ -88,6 +88,176 @@
       color: var(--muted);
       font-weight: 500;
     }
+    /* ===== Creative Gallery – Bento Style ===== */
+.gallery-section {
+  background: var(--warm-white);
+  padding: 5rem 0;
+}
+
+.gallery-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: scale(0.96) translateY(20px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Overlay */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(18, 63, 70, 0.75) 0%,
+    rgba(18, 63, 70, 0.1) 50%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay span {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Size variations for bento look */
+.gallery-item--large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-item--wide {
+  grid-column: span 2;
+}
+
+.gallery-item--tall {
+  grid-row: span 2;
+}
+
+/* ===== Lightbox ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 63, 70, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+  padding: 2rem;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: min(1100px, 92vw);
+  max-height: 78vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  color: rgba(255,255,255,0.9);
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 600px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.8rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .gallery-bento {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+  .gallery-item--large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery-item--wide {
+    grid-column: span 2;
+  }
+  .gallery-item--tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .gallery-bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+  .gallery-item--large,
+  .gallery-item--wide,
+  .gallery-item--tall {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
 
     /* ===== Lessons Grid ===== */
     .lessons-grid {
@@ -298,6 +468,87 @@
     </div>
   </section>
 
+  <!-- ===== KOROMI IN PICTURES ===== -->
+<section class="gallery-section">
+  <div class="container">
+    <h2 class="section-title">Koromi in Pictures</h2>
+    <p class="section-sub">A living laboratory of dryland forestry, biodiversity and restoration in coastal Kenya.</p>
+
+    <div class="gallery-bento">
+      <!-- Large hero image -->
+      <div class="gallery-item gallery-item--large" data-caption="Melia volkensii stands under dryland conditions">
+        <img src="images/Koromi-10.jpg" alt="Koromi landscape" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Melia stands • Dryland forestry</span>
+        </div>
+      </div>
+
+      <!-- Medium -->
+      <div class="gallery-item" data-caption="Young Melia plantation">
+        <img src="images/Koromi-12.jpg" alt="Young Melia" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Young Melia plantation</span>
+        </div>
+      </div>
+
+      <!-- Medium -->
+      <div class="gallery-item" data-caption="Nursery production">
+        <img src="images/koromi/nursery.jpg" alt="Nursery" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Nursery systems</span>
+        </div>
+      </div>
+
+      <!-- Wide -->
+      <div class="gallery-item gallery-item--wide" data-caption="Biodiversity corridors and natural vegetation">
+        <img src="images/koromi/biodiversity.jpg" alt="Biodiversity" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Biodiversity & natural vegetation</span>
+        </div>
+      </div>
+
+      <!-- Small -->
+      <div class="gallery-item" data-caption="Water infrastructure">
+        <img src="images/koromi/water.jpg" alt="Water systems" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Water management</span>
+        </div>
+      </div>
+
+      <!-- Small -->
+      <div class="gallery-item" data-caption="Field operations">
+        <img src="images/Working-08.jpg" alt="Operations" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Field operations</span>
+        </div>
+      </div>
+
+      <!-- Tall -->
+      <div class="gallery-item gallery-item--tall" data-caption="Enrichment planting and restoration">
+        <img src="images/Dilemma-5.jpg" alt="Restoration" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Restoration & enrichment</span>
+        </div>
+      </div>
+
+      <!-- Medium -->
+      <div class="gallery-item" data-caption="Landscape overview">
+        <img src="images/koromi/overview.jpg" alt="Overview" loading="lazy">
+        <div class="gallery-overlay">
+          <span>Managed landscape</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img src="" alt="" id="lightbox-img">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
   <section style="background:var(--white);">
     <div class="container">
       <h2 class="section-title">What Koromi Has Taught Us</h2>
@@ -431,6 +682,44 @@
     document.querySelectorAll('.stat-box, .lesson-card').forEach(el => {
       observer.observe(el);
     });
+  
+
+  // Gallery scroll animation
+document.querySelectorAll('.gallery-item').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.08}s`;
+  observer.observe(el);
+});
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const closeBtn = document.querySelector('.lightbox-close');
+
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const img = item.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = item.dataset.caption || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
   </script>
 </body>
 </html>

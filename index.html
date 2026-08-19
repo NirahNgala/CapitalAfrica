@@ -585,7 +585,7 @@
  <header class="nav">
   <div class="container nav-inner">
     <a href="index.html" class="logo">
-      <img src="images/atfarm3.jpeg" alt="Capital Africa" class="logo-img">
+      <img src="images/15Artboard 19 copy@2x-100.jpg" alt="Capital Africa" class="logo-img">
       <div class="logo-text">
         Capital Africa
         <span>Nature-Based Investments</span>
@@ -619,21 +619,30 @@
 </header>
 
   <!-- PARALLAX HERO -->
-  <section class="hero">
-    <div class="hero-parallax" id="heroParallax"></div>
-    <div class="hero-overlay"></div>
-    <div class="container">
-      <div class="hero-content">
-        <h1>Building Investable Natural Capital Projects in East Africa</h1>
-        <p>Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects. We work with landowners, communities, public institutions, carbon developers and investors to create projects that combine environmental restoration with long-term commercial value.</p>
-        <div class="hero-btns">
-          <a href="projects.html" class="btn btn-teal">View Our Projects</a>
-          <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-        </div>
-        <p class="hero-secondary"><a href="koromi.html">Explore Koromi Farm →</a></p>
-      </div>
+<!-- HERO WITH DRONE VIDEO -->
+<section class="hero">
+  <!-- Video background -->
+  <video class="hero-video" 
+         autoplay muted loop playsinline 
+         poster="images/TREASURE TREES.JPG">
+    <source src="images/drone-koromi.mp4" type="video/mp4">
+    <!-- optional webm for better compression -->
+    <source src="images/drone-koromi.webm" type="video/webm">
+  </video>
+
+  <!-- Dark overlay for readability -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="container hero-content">
+    <h1>Building Investable Natural Capital Projects in East Africa</h1>
+    <p>Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects.</p>
+    <div class="hero-btns">
+      <a href="koromi.html" class="btn btn-copper">Explore Koromi Farm →</a>
+      <a href="contact.html" class="btn btn-teal">Discuss a Partnership</a>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- INTRO -->
   <section class="intro">
@@ -729,7 +738,7 @@
       <div class="projects-grid">
         <article class="project-card">
           <div class="project-img">
-            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Koromi Farm">
+            <img src="images/DJI_0278 (2).JPG" alt="Koromi Farm">
             <span class="stage-badge stage-operational">Operational</span>
           </div>
           <div class="project-body">
@@ -853,27 +862,13 @@ navLinks.querySelectorAll('a').forEach(link => {
     hamburger.setAttribute('aria-expanded', false);
   });
 });
-    // ===== PARALLAX =====
-    const heroParallax = document.getElementById('heroParallax');
-    const statsParallax = document.getElementById('statsParallax');
-
-    function updateParallax() {
-      const scrollY = window.scrollY;
-
-      // Hero parallax (moves slower than scroll)
-      if (heroParallax) {
-        const heroSpeed = 0.35; // lower = more subtle
-        heroParallax.style.transform = `translate3d(0, ${scrollY * heroSpeed}px, 0)`;
-      }
-
-      // Stats band parallax
-      if (statsParallax) {
-        const statsSection = statsParallax.parentElement;
-        const rect = statsSection.getBoundingClientRect();
-        const offset = (window.innerHeight - rect.top) * 0.12;
-        statsParallax.style.transform = `translate3d(0, ${offset}px, 0)`;
-      }
-    }
+   window.addEventListener('scroll', () => {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+  const scrolled = window.pageYOffset;
+  // High amount of movement (adjust 0.35–0.55)
+  video.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.45}px)) scale(1.05)`;
+}, { passive: true });
 
     // Use requestAnimationFrame for smooth performance
     let ticking = false;

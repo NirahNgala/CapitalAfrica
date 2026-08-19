@@ -32,7 +32,7 @@
 }
 
 .logo-img {
-  height: 40px;
+  height: 80px;
   width: 40px;
   object-fit: cover;
   border-radius: 50%;           /* matches the circular look in your screenshot */
@@ -453,34 +453,47 @@
     }
 
     /* ========== PARALLAX HERO ========== */
-    .hero {
-      position: relative;
+   .hero {
+  position: relative;
       height: 85vh;
       min-height: 580px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
 
-    .hero-parallax {
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=85') center/cover no-repeat;
-      will-change: transform;
-      transform: translateZ(0);
-    }
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  /* subtle scale so it feels more cinematic */
+  scale: 1.05;
+}
 
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, rgba(18,63,70,0.88) 0%, rgba(18,63,70,0.55) 55%, rgba(18,63,70,0.35) 100%);
-    }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(18, 63, 70, 0.82) 0%,
+    rgba(18, 63, 70, 0.55) 20%,
+    rgba(18, 63, 70, 0.40) 0%
+  );
+  z-index: 1;
+}
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
+.hero-content {
+  position: relative;
+  z-index: 2;
       max-width: 640px;
-      color: white;
+  color: white;
   max-width: 680px;
 }
 
@@ -488,7 +501,7 @@
 .hero-video {
   will-change: transform;
   transition: transform 0.1s linear;
-    }
+}
     .hero h1 {
       font-size: clamp(2rem, 4.5vw, 3.1rem);
       font-weight: 700;

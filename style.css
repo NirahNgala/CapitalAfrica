@@ -481,7 +481,13 @@
       z-index: 2;
       max-width: 640px;
       color: white;
-      padding: 2rem 0;
+  max-width: 680px;
+}
+
+/* High parallax on the video */
+.hero-video {
+  will-change: transform;
+  transition: transform 0.1s linear;
     }
     .hero h1 {
       font-size: clamp(2rem, 4.5vw, 3.1rem);

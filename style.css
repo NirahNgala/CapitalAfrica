@@ -33,9 +33,9 @@
 
 .logo-img {
   height: 80px;
-  width: 40px;
+  width: 80px;
   object-fit: cover;
-  border-radius: 50%;           /* matches the circular look in your screenshot */
+  border-radius: 0%;           /* matches the circular look in your screenshot */
   flex-shrink: 0;
 }
 
@@ -452,87 +452,7 @@
       display: block;
     }
 
-    /* ========== PARALLAX HERO ========== */
-   .hero {
-  position: relative;
-      height: 85vh;
-      min-height: 580px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: 0;
-  /* subtle scale so it feels more cinematic */
-  scale: 1.05;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    105deg,
-    rgba(18, 63, 70, 0.82) 0%,
-    rgba(18, 63, 70, 0.55) 20%,
-    rgba(18, 63, 70, 0.40) 0%
-  );
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-      max-width: 640px;
-  color: white;
-  max-width: 680px;
-}
-
-/* High parallax on the video */
-.hero-video {
-  will-change: transform;
-  transition: transform 0.1s linear;
-}
-    .hero h1 {
-      font-size: clamp(2rem, 4.5vw, 3.1rem);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      margin-bottom: 2rem;
-      line-height: 1.65;
-      max-width: 540px;
-    }
-    .hero-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-secondary {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-    .hero-secondary a {
-      color: white;
-      border-bottom: 1px solid rgba(255,255,255,0.5);
-      transition: border-color 0.2s;
-    }
-    .hero-secondary a:hover { border-color: white; }
-
+   
     /* ========== INTRO ========== */
     .intro {
       padding: 3.5rem 0 2.5rem;
@@ -636,24 +556,106 @@
       line-height: 1.55;
     }
 
-    .themes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .theme-chip {
-      background: var(--white);
-      border: 1px solid rgba(18,63,70,0.1);
-      border-left: 4px solid var(--olive);
-      border-radius: var(--radius);
-      padding: 1.1rem 1.25rem;
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-    .theme-chip:hover {
-      border-left-color: var(--copper);
-      background: rgba(198,106,50,0.04);
-    }
+   /* ===== Investment Themes ===== */
+.themes-section {
+  background: var(--white);
+  padding: 4.5rem 0 5rem;
+}
+
+.themes-section .section-header {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.themes-section .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Grid */
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+/* Card */
+.theme-card {
+  position: relative;
+  background: var(--warm-white);
+  border: 1px solid rgba(18, 63, 70, 0.07);
+  border-radius: 12px;
+  padding: 1.5rem 1.4rem 1.5rem 1.6rem;
+  transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: default;
+  overflow: hidden;
+}
+
+/* Left accent bar */
+.theme-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--olive);
+  transition: background 0.28s ease, width 0.28s ease;
+}
+
+/* Text */
+.theme-card h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.45;
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+/* Hover state */
+.theme-card:hover {
+  transform: translateY(-5px);
+  background: var(--white);
+  border-color: rgba(198, 106, 50, 0.18);
+  box-shadow: 0 12px 28px rgba(18, 63, 70, 0.09);
+}
+
+.theme-card:hover .theme-accent {
+  background: var(--copper);
+  width: 5px;
+}
+
+.theme-card:hover h3 {
+  color: var(--teal);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .themes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .themes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-card {
+    padding: 1.35rem 1.3rem 1.35rem 1.5rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-card {
+    transition: none;
+  }
+  .theme-card:hover {
+    transform: none;
+  }
+}
 
     .projects-grid {
       display: grid;
@@ -731,6 +733,213 @@
       margin-left: auto;
       margin-right: auto;
     }
+/* ===== What We Do – Process Track ===== */
+.what-we-do {
+  padding: 4.5rem 0;
+  background: var(--warm-white);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Desktop: 4 equal columns */
+.process-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  position: relative;
+}
+
+.process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Number + connecting line (desktop only) */
+.step-indicator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  z-index: 2;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: var(--teal);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 14px rgba(18, 63, 70, 0.18);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.step-line {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: calc(100% + 1.25rem);
+  height: 2px;
+  background: linear-gradient(to right, var(--teal), rgba(18, 63, 70, 0.2));
+  z-index: -1;
+  transform: translateX(24px);
+}
+
+.process-step:last-child .step-line {
+  display: none;
+}
+
+/* Content card */
+.step-content {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.35rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(18, 63, 70, 0.06);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.step-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(18, 63, 70, 0.06);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.15rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.step-icon video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+}
+
+.step-content h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--teal);
+  margin-bottom: 0.55rem;
+  line-height: 1.3;
+}
+
+.step-content p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* Hover effects */
+.process-step:hover .step-number,
+.process-step:focus-within .step-number {
+  background: var(--copper);
+  transform: scale(1.08);
+}
+
+.process-step:hover .step-content,
+.process-step:focus-within .step-content {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(18, 63, 70, 0.12);
+  border-color: rgba(198, 106, 50, 0.2);
+}
+
+/* ========== MOBILE CAROUSEL (≤ 900px) ========== */
+@media (max-width: 900px) {
+
+  .process-track {
+    display: flex;
+    grid-template-columns: none;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 1.25rem 1.5rem;   /* side padding + bottom space for shadow */
+    margin: 0 -1.25rem;                /* pull to edge of container */
+    scrollbar-width: none;             /* Firefox */
+  }
+
+  .process-track::-webkit-scrollbar {
+    display: none;                     /* Chrome, Safari */
+  }
+
+  .process-step {
+    flex: 0 0 78%;                     /* shows part of next card */
+    max-width: 320px;
+    scroll-snap-align: center;
+    text-align: left;
+  }
+
+  /* Hide the connecting lines on mobile */
+  .step-line {
+    display: none;
+  }
+
+  .step-indicator {
+    margin-bottom: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    width: 42px;
+    height: 42px;
+    font-size: 1.05rem;
+  }
+
+  .step-content {
+    text-align: left;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .step-icon {
+    margin: 0 0 1rem 0;
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .process-step {
+    flex: 0 0 82%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .step-number,
+  .step-content {
+    transition: none;
+  }
+  .process-step:hover .step-number,
+  .process-step:hover .step-content {
+    transform: none;
+  }
+}
 
     .why-grid {
       display: grid;

@@ -4,191 +4,327 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Capital Africa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ========== CONTACT PAGE ========== */
+    .page-hero--contact {
+      padding: 4.5rem 0 4.5rem;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero--contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .page-hero--contact .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-hero--contact h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .page-hero--contact p {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      opacity: 0.92;
+      color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .contact-section {
+      padding: 4.5rem 0 6rem;
+      background: linear-gradient(180deg, #fff 0%, #ffff 100%);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .contact-info .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.85rem;
+      color: var(--green-900, #0f2a1a);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-info > p {
+      color: var(--muted, #5c6b6e);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .contact-topics {
+      list-style: none;
+      margin: 0 0 2.25rem;
+      padding: 0;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .contact-topics li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding: 0.65rem 0.9rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 63, 70, 0.08);
+      color: var(--charcoal, #1a2b2e);
+      font-size: 0.95rem;
+      line-height: 1.45;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-topics li:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 14px rgba(15, 42, 26, 0.08);
+    }
+
+    .contact-topics li::before {
+      content: '→';
+      color: var(--teal, #123f46);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .info-cards {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid rgba(18, 63, 70, 0.08);
+      box-shadow: 0 2px 10px rgba(15, 42, 26, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(15, 42, 26, 0.1);
+    }
+
+    .info-card h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--teal, #123f46);
+      margin: 0 0 0.35rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--charcoal, #1a2b2e);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .info-card a {
+      color: var(--copper, #c47a3a);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .info-card a:hover {
+      color: #a6632e;
+      text-decoration: underline;
+    }
+
+    /* Form card */
+    .form-card {
+      background: rgba(226, 250, 250, 0.866);
+      border-radius: 14px;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 12px 40px rgba(15, 42, 26, 0.1);
+      border: 1px solid rgba(18, 63, 70, 0.07);
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .form-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      color: var(--teal, #123f46);
+      margin: 0 0 0.35rem;
+    }
+
+    .form-card .form-intro {
+      color: var(--muted, #5c6b6e);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--charcoal, #1a2b2e);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid rgba(18, 63, 70, 0.14);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--charcoal, #1a2b2e);
+      background: #faf9f6;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .form-group input:hover,
+    .form-group select:hover,
+    .form-group textarea:hover {
+      border-color: rgba(18, 63, 70, 0.28);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--teal, #123f46);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(18, 63, 70, 0.12);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-card .btn-copper {
+      width: 100%;
+      margin-top: 0.35rem;
+      padding: 0.95rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 100px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-card .btn-copper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(196, 122, 58, 0.35);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.75rem;
+      }
+      .form-card {
+        position: static;
+      }
+      .page-hero--contact {
+        padding: 5.5rem 0 3.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-card {
+        padding: 1.75rem 1.35rem;
+      }
+      .contact-section {
+        padding: 3rem 0 4.5rem;
+      }
+    }
+  </style>
 </head>
-<style>
-  /* ========== CONTACT PAGE ========== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-.container .contact-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 0rem;
-  background-color: rgba(0, 255, 255, 0.268);
-}
-
-
-.contact-info .section-title {
-  margin-bottom: 1rem;
-}
-
-.contact-info > p {
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.contact-info ul {
-  list-style: none;
-  margin-bottom: 2rem;
-}
-
-.contact-info ul li {
-  padding: 0.4rem 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.contact-info h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--teal);
-  margin: 1.5rem 0 0.35rem;
-}
-
-.contact-info h3 + p {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* Form card */
-.form-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 2rem 1.75rem;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(18, 63, 70, 0.06);
-}
-
-.form-group {
-  margin-bottom: 1.15rem;
-}
-
-.form-group label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--charcoal);
-  margin-bottom: 0.4rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid rgba(18, 63, 70, 0.15);
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: var(--charcoal);
-  background: var(--warm-white);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(18, 63, 70, 0.1);
-}
-
-.form-group textarea {
-  min-height: 140px;
-  resize: vertical;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-</style>
 <body>
-   <header class="nav">
-    <div class="container nav-inner">
-        <a href="index.html" class="logo">
-  <img src="images/15Artboard 19 copy@2x-100.jpg" alt="Capital Africa" class="logo-img">
-  <div class="logo-text">
-    Capital Africa
-    <span>Nature-Based Investments</span>
-  </div>
-</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="approach.html">Approach</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="koromi.html">Koromi</a></li>
-        <li><a href="partnerships.html">Partnerships</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+  <div id="header"></div>
+
+  <section class="page-hero--contact">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>Capital Africa welcomes discussions with investors, carbon developers, institutional landowners and technical partners interested in developing scalable natural capital projects in East Africa.</p>
     </div>
-  </header>
+  </section>
 
- <section class="page-hero--contact">
-  <div class="container">
-    <h1><b>Contact</b></h1>
-    <p style="color:var(--white)">Capital Africa welcomes discussions with investors, carbon developers, institutional landowners and technical partners interested in developing scalable natural capital projects in East Africa.</p>
-  </div>
-</section>
-
-  <section>
+  <section class="contact-section">
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
           <h2 class="section-title">Get in touch</h2>
-          <p>Contact us regarding:</p>
-          <ul>
-            <li>• Forestry and natural capital investment</li>
-            <li>• Carbon-development collaboration and carbon credit offtake</li>
-            <li>• Institutional land partnerships</li>
-            <li>• Project-development and joint-venture opportunities</li>
-            <li>• Technical and research cooperation</li>
-            <li>• Nursery, propagation and implementation capacity</li>
+          <p>We’d love to hear from you about:</p>
+          <ul class="contact-topics">
+            <li>Forestry and natural capital investment</li>
+            <li>Carbon-development collaboration and credit offtake</li>
+            <li>Institutional land partnerships</li>
+            <li>Project-development and joint-venture opportunities</li>
+            <li>Technical and research cooperation</li>
+            <li>Nursery, propagation and implementation capacity</li>
           </ul>
 
-          <h3>Kenya Operating Presence</h3>
-          <p>[]</p>
-
-          <h3>Netherlands</h3>
-          <p>Treasure Trees BV</p>
-
-          <h3>Email</h3>
-          <p><a href="mailto:info@capitalafrica.com" style="color:var(--copper);">info@capitalafrica.com</a></p>
-
-          <h3>LinkedIn</h3>
-          <p>[]</p>
+          <div class="info-cards">
+            <div class="info-card">
+              <h3>Kenya</h3>
+              <p>Operating presence across coastal & ASAL landscapes</p>
+            </div>
+            <div class="info-card">
+              <h3>Netherlands</h3>
+              <p>Treasure Trees BV</p>
+            </div>
+            <div class="info-card">
+              <h3>Email</h3>
+              <p><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></p>
+            </div>
+            <div class="info-card">
+              <h3>LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/company/capital-africa" target="_blank" rel="noopener">Connect with us</a></p>
+            </div>
+          </div>
         </div>
 
         <div class="form-card">
-          <h3 style="color:var(--teal); margin-bottom:1.25rem;">Send a message</h3>
+          <h3>Send a message</h3>
+          <p class="form-intro">Tell us a little about yourself and how we can help. We’ll respond as soon as we can.</p>
           <form action="#" method="POST">
             <div class="form-group">
               <label for="name">Full name</label>
-              <input type="text" id="name" name="name" required>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
+              <input type="email" id="email" name="email" placeholder="you@organisation.com" required>
             </div>
             <div class="form-group">
               <label for="organisation">Organisation</label>
-              <input type="text" id="organisation" name="organisation">
+              <input type="text" id="organisation" name="organisation" placeholder="Company or institution">
             </div>
             <div class="form-group">
               <label for="category">I am contacting as a…</label>
@@ -202,59 +338,36 @@
             </div>
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
+              <textarea id="message" name="message" placeholder="How can we work together?" required></textarea>
             </div>
-            <button type="submit" class="btn btn-copper" style="width:100%;">Send Message</button>
+            <button type="submit" class="btn btn-copper">Send Message</button>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand">Capital Africa<span>Nature-Based Investments</span></div>
-          <p style="margin-top:0.75rem; max-width:280px;">Developing investable forestry, carbon and biodiversity projects in East Africa.</p>
-        </div>
-        <div>
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="koromi.html">Koromi</a></li>
-            <li><a href="impact.html">Impact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Engage</h4>
-          <ul>
-            <li><a href="contact.html">Partner With Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li>Kenya operating presence</li>
-            <li>Treasure Trees BV (Netherlands)</li>
-            <li><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Capital Africa Agribusiness Ventures Ltd</span>
-        <span>All rights reserved</span>
-      </div>
-    </div>
-  </footer>
+  <div id="footer"></div>
 
   <script>
+    // Load shared header + footer
+    async function loadPartial(id, url) {
+      const response = await fetch(url);
+      const html = await response.text();
+      document.getElementById(id).innerHTML = html;
+    }
+
+    loadPartial('header', 'header.html');
+    loadPartial('footer', 'footer.html');
+
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+      });
+    }
   </script>
 </body>
 </html>

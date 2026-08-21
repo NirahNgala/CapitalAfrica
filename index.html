@@ -112,38 +112,7 @@
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <a href="index.html" class="logo">
-        <img src="images/15Artboard 19 copy@2x-100.jpg" alt="Capital Africa" class="logo-img">
-        <div class="logo-text">
-          Capital Africa
-          <span>Nature-Based Investments</span>
-        </div>
-      </a>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="approach.html">Approach</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="koromi.html">Koromi</a></li>
-        <li><a href="partnerships.html">Partnerships</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+<div id="header"></div>
 
   <!-- CINEMATIC HERO with rotating backgrounds + parallax -->
 <section class="hero" id="hero">
@@ -406,181 +375,118 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand">Capital Africa<span>Nature-Based Investments</span></div>
-          <p style="margin-top:0.75rem; max-width:280px;">Developing investable forestry, carbon and biodiversity projects in East Africa.</p>
-        </div>
-        <div>
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="koromi.html">Koromi</a></li>
-            <li><a href="impact.html">Impact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Engage</h4>
-          <ul>
-            <li><a href="contact.html">Partner With Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li>Kenya operating presence</li>
-            <li>Treasure Trees BV (Netherlands)</li>
-            <li><a href="mailto:info@capitalafrica.com">info@capitalafrica.com</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Capital Africa Agribusiness Ventures Ltd</span>
-        <span>All rights reserved</span>
-      </div>
-    </div>
-  </footer>
+<div id="footer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<script>
+    // ===== Load shared header + footer =====
+    async function loadPartial(id, url) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(url + ' not found');
+        el.innerHTML = await res.text();
+      } catch (err) {
+        console.error('Could not load partial:', err);
+      }
+    }
 
-  <script>
-    // ===== Hamburger Menu =====
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
+    Promise.all([
+      loadPartial('header', 'header.html'),
+      loadPartial('footer', 'footer.html')
+    ]).then(() => {
+      // Mobile menu — only after header exists
+      const hamburger = document.getElementById('hamburger');
+      const navLinks  = document.getElementById('navLinks');
 
-    hamburger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isOpen);
+        });
 
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', false);
-      });
-    });
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
 
-    // ===== Active Nav Link =====
-    (function setActiveNav() {
-      let currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      if (!currentPage.includes('.')) currentPage += '.html';
-
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-        const linkPage = href.split('/').pop();
-        if (linkPage === currentPage) {
-          link.classList.add('active');
+      // Active nav link
+      const path = location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && href.split('/').pop() === path) {
+          a.classList.add('active');
         }
       });
-    })();
-
-    // ===== Lenis Smooth Scroll + GSAP Integration =====
-    const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    // ===== Hero slideshow (only one active at a time) =====
+    const slides = document.querySelectorAll('.hero-bg');
+    let currentSlide = 0;
+    let slideTimer = null;
+
+    function nextSlide() {
+      if (!slides.length) return;
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
     }
-    requestAnimationFrame(raf);
 
-    // Connect Lenis → ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+    // ===== Parallax =====
+    const heroBgWrapper = document.querySelector('.hero-bg-wrapper');
 
-    // ===== GSAP Cinematic Hero (Glasfurd & Walker style) =====
-    gsap.registerPlugin(ScrollTrigger);
+    function updateParallax() {
+      if (!heroBgWrapper) return;
+      const rate = window.pageYOffset * 0.35;
+      heroBgWrapper.style.transform = `translate3d(0, ${rate}px, 0)`;
+    }
 
-    // Elegant entrance
-    gsap.from(".hero-title", {
-      y: 90,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power3.out",
-      delay: 0.2
-    });
+    // ===== Lenis + GSAP =====
+    if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
+      const lenis = new Lenis({
+        duration: 1.4,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
 
-    gsap.from(".hero-sub, .hero-btns", {
-      y: 50,
-      opacity: 0,
-      duration: 1.3,
-      ease: "power3.out",
-      delay: 0.55,
-      stagger: 0.12
-    });
-
-    // Strong parallax on the drone video
-    gsap.to(".hero-video", {
-      yPercent: 35,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.4          // higher = heavier / more cinematic
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
-    });
+      requestAnimationFrame(raf);
 
-    // Content scales down + fades (the signature studio feel)
-    gsap.to(".hero-content", {
-      yPercent: -18,
-      scale: 0.90,
-      opacity: 0.25,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.4
-      }
-    });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from('.hero-title', {
+        y: 90, opacity: 0, duration: 1.5, ease: 'power3.out', delay: 0.2
+      });
+      gsap.from('.hero-sub, .hero-btns', {
+        y: 50, opacity: 0, duration: 1.3, ease: 'power3.out', delay: 0.55, stagger: 0.12
+      });
+      gsap.to('.hero-content', {
+        yPercent: -18, scale: 0.90, opacity: 0.25, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.4 }
+      });
+    }
+
+    // Start slideshow + parallax unless user prefers reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      slideTimer = setInterval(nextSlide, 4000);
+      window.addEventListener('scroll', updateParallax, { passive: true });
+    }
   </script>
-  <script>
-  // ===== Hero Slideshow =====
-  const slides = document.querySelectorAll('.hero-bg');
-  let currentSlide = 0;
-  const slideInterval = 4000; // change every 4 seconds
+</body>
 
-  function nextSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }
-
-  setInterval(nextSlide, slideInterval);
-
-
-  // ===== Parallax on scroll =====
-  const heroBgWrapper = document.querySelector('.hero-bg-wrapper');
-
-  function updateParallax() {
-    const scrolled = window.pageYOffset;
-    // Adjust the 0.35 value to make parallax stronger or weaker
-    const rate = scrolled * 0.35;
-    heroBgWrapper.style.transform = `translate3d(0, ${rate}px, 0)`;
-  }
-
-  window.addEventListener('scroll', updateParallax, { passive: true });
-
-
-  // Respect reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Stop slideshow and parallax
-    clearInterval(nextSlide);
-    window.removeEventListener('scroll', updateParallax);
-  }
-</script>
 </body>
 </html>

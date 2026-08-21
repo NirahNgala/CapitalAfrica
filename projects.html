@@ -22,11 +22,14 @@
       line-height: 1.15;
       margin-bottom: 1.5rem;
       max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .projects-hero p {
+    .page-hero--projects p {
       font-size: 1.15rem;
       max-width: 580px;
+      margin: 0 auto;
       opacity: 0.9;
       font-weight: 400;
     }
@@ -106,7 +109,7 @@
       box-shadow: var(--shadow-md);
       overflow: hidden;
       margin-bottom: 2.5rem;
-      transition: var(--transition);
+      transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       border: 1px solid transparent;
     }
 
@@ -365,9 +368,64 @@
       font-size: 0.95rem;
     }
 
+    /* Simple site footer (in case style.css footer is missing) */
+    .site-footer {
+      background: #0f2a1a;
+      color: rgba(255,255,255,0.85);
+      padding: 3.5rem 1.5rem 2rem;
+    }
+    .site-footer .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+    @media (max-width: 768px) {
+      .site-footer .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+    .site-footer h4 {
+      color: white;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .site-footer a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.9rem;
+    }
+    .site-footer a:hover {
+      color: white;
+    }
+    .site-footer .footer-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    .site-footer .footer-tag {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    .site-footer .footer-bottom {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.85rem;
+      opacity: 0.7;
+      text-align: center;
+    }
+
     /* Responsive tweaks */
     @media (max-width: 640px) {
-      .projects-hero {
+      .page-hero--projects {
         padding: 5rem 1.25rem 3.5rem;
       }
       .project-body {
@@ -381,310 +439,333 @@
 </head>
 <body>
 
-<header class="nav">
-  <div class="container nav-inner">
-    <a href="index.html" class="logo">
-      <img src="images/15Artboard 19 copy@2x-100.jpg" alt="Capital Africa" class="logo-img">
-      <div class="logo-text">
-        Capital Africa
-        <span>Nature-Based Investments</span>
-      </div>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="approach.html">Approach</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
-      <li><a href="koromi.html">Koromi</a></li>
-      <li><a href="partnerships.html">Partnerships</a></li>
-      <li><a href="impact.html">Impact</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <a href="contact.html" class="btn btn-copper">Partner With Us</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
+<div id="header"></div>
 <!-- Hero -->
 <section class="page-hero--projects">
   <div class="container">
-      <div class="hero-label">Natural Capital Portfolio</div>
-      <h1>Projects organised by development stage</h1>
-      <p>Capital Africa distinguishes clearly between operational assets, projects in formal development, and early-stage pipeline opportunities.</p>
+    <div class="hero-label">Natural Capital Portfolio</div>
+    <h1>Projects organised by development stage</h1>
+    <p>Capital Africa distinguishes clearly between operational assets, projects in formal development, and early-stage pipeline opportunities.</p>
   </div>
 </section>
 
-  <!-- STAGE NAV -->
-  <nav class="stage-nav">
-    <div class="stage-nav-inner">
-      <button class="stage-btn active" data-stage="all">All Projects</button>
-      <button class="stage-btn" data-stage="operational">Operational</button>
-      <button class="stage-btn" data-stage="development">In Development</button>
-      <button class="stage-btn" data-stage="pipeline">Pipeline</button>
-    </div>
-  </nav>
+<!-- STAGE NAV -->
+<nav class="stage-nav">
+  <div class="stage-nav-inner">
+    <button class="stage-btn active" data-stage="all">All Projects</button>
+    <button class="stage-btn" data-stage="operational">Operational</button>
+    <button class="stage-btn" data-stage="development">In Development</button>
+    <button class="stage-btn" data-stage="pipeline">Pipeline</button>
+  </div>
+</nav>
 
-  <!-- PROJECTS -->
-  <section class="projects-section">
-    <div class="container">
+<!-- PROJECTS -->
+<section class="projects-section">
+  <div class="container">
 
-      <!-- 4.1 Koromi Farm -->
-      <article class="project-card" data-stage="operational">
-        <div class="project-header">
-          <div class="project-visual">
-            <span class="stage-badge stage-operational">Operational Proof of Concept</span>
-            <div class="project-title-block">
-              <h3>Koromi Farm</h3>
-          <div class="project-location">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Kilifi County, coastal Kenya
-          </div>
+    <!-- 4.1 Koromi Farm -->
+    <article class="project-card" data-stage="operational">
+      <div class="project-header">
+        <div class="project-visual">
+          <span class="stage-badge stage-operational">Operational Proof of Concept</span>
+          <div class="project-title-block">
+            <h3>Koromi Farm</h3>
+            <div class="project-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Kilifi County, coastal Kenya
             </div>
           </div>
-          <div class="project-body">
-            <p class="project-desc">
-              A dryland forestry, biodiversity and land-management site used to test commercial forestry, restoration, nursery systems, water management and operational approaches before larger-scale deployment.
-            </p>
-            <div class="meta-grid">
-              <div class="meta-item">
-                <h4>Timeline</h4>
-                <p>Established 2019 · Multi-rotation</p>
-              </div>
-              <div class="meta-item">
-                <h4>Status</h4>
-                <p>Operational with active trials</p>
-              </div>
-              <div class="meta-item">
-                <h4>Focus</h4>
-                <p>Proof-of-concept platform</p>
-              </div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            A dryland forestry, biodiversity and land-management site used to test commercial forestry, restoration, nursery systems, water management and operational approaches before larger-scale deployment.
+          </p>
+          <div class="meta-grid">
+            <div class="meta-item">
+              <h4>Timeline</h4>
+              <p>Established 2019 · Multi-rotation</p>
             </div>
+            <div class="meta-item">
+              <h4>Status</h4>
+              <p>Operational with active trials</p>
+            </div>
+            <div class="meta-item">
+              <h4>Focus</h4>
+              <p>Proof-of-concept platform</p>
+            </div>
+          </div>
           <button class="expand-btn" aria-expanded="false">
             View full details
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
+        </div>
+      </div>
+
+      <div class="project-details">
+        <div class="details-inner">
+          <div class="detail-block">
+            <h4>Objectives</h4>
+            <ul>
+              <li>Validate dryland forestry systems</li>
+              <li>Produce commercial timber assets</li>
+              <li>Conserve and restore natural vegetation</li>
+              <li>Test species and planting density</li>
+              <li>Develop operational capacity</li>
+              <li>Monitor biodiversity</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Environmental Benefits</h4>
+            <ul>
+              <li>Increased tree cover & indigenous species</li>
+              <li>Habitat protection and soil cover</li>
+              <li>Reduced erosion</li>
+              <li>Water-management improvements</li>
+              <li>Ongoing biodiversity monitoring</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Revenue Model</h4>
+            <p>Long-term timber, poles, honey and potential carbon or biodiversity value. Koromi is primarily a proof-of-concept and operating platform rather than a stand-alone investment offering.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Current Status</h4>
+            <p>Operational, with established forestry blocks, conservation areas, water infrastructure and ongoing trials.</p>
+          </div>
+          <div class="project-cta">
+            <div class="cta-box">
+              <p>Detailed project information, maps, commercial assumptions and capital requirements are available to qualified partners.</p>
+              <a href="contact.html" class="btn-primary">Request information →</a>
+            </div>
           </div>
         </div>
-
-          <div class="project-details">
-            <div class="details-inner">
-            <div class="detail-block">
-              <h4>Objectives</h4>
-              <ul>
-                <li>Validate dryland forestry systems</li>
-                <li>Produce commercial timber assets</li>
-                <li>Conserve and restore natural vegetation</li>
-                <li>Test species and planting density</li>
-                <li>Develop operational capacity</li>
-                <li>Monitor biodiversity</li>
-              </ul>
-            </div>
-            <div class="detail-block">
-              <h4>Environmental Benefits</h4>
-              <ul>
-                <li>Increased tree cover & indigenous species</li>
-                <li>Habitat protection and soil cover</li>
-                <li>Reduced erosion</li>
-                <li>Water-management improvements</li>
-                <li>Ongoing biodiversity monitoring</li>
-              </ul>
-            </div>
-            <div class="detail-block">
-              <h4>Revenue Model</h4>
-              <p>Long-term timber, poles, honey and potential carbon or biodiversity value. Koromi is primarily a proof-of-concept and operating platform rather than a stand-alone investment offering.</p>
-            </div>
-            <div class="detail-block">
-              <h4>Current Status</h4>
-              <p>Operational, with established forestry blocks, conservation areas, water infrastructure and ongoing trials.</p>
-            </div>
-            <div class="project-cta">
-              <div class="cta-box">
-                <p>Detailed project information, maps, commercial assumptions and capital requirements are available to qualified partners.</p>
-                <a href="#contact" class="btn-primary">Request information →</a>
-              </div>
-            </div>
-          </div>
-
-          <a href="koromi.html" class="btn btn-teal" style="align-self:flex-start; margin-top:1.25rem;">Explore Koromi →</a>
+        <div style="padding: 0 2rem 2rem;">
+          <a href="koromi.html" class="btn btn-teal">Explore Koromi →</a>
         </div>
-      </article>
+      </div>
+    </article>
 
-      <!-- 4.2 SEKU Partnership -->
-      <article class="project-card" data-stage="development">
-        <div class="project-header">
-          <div class="project-visual" style="background: linear-gradient(145deg, #3d2e1a, #5c4528);">
+    <!-- 4.2 SEKU Partnership -->
+    <article class="project-card" data-stage="development">
+      <div class="project-header">
+        <div class="project-visual" style="background: linear-gradient(145deg, #3d2e1a, #5c4528);">
           <span class="stage-badge stage-development">In Development</span>
-            <div class="project-title-block">
-              <h3>SEKU Dryland Forestry Partnership</h3>
-          <div class="project-location">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            South-eastern Kenya
-          </div>
-            </div>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">
-              A proposed long-term institutional land partnership combining dryland commercial forestry, carbon, agroforestry, restoration, research and local value addition.
-            </p>
-            <div class="meta-grid">
-              <div class="meta-item">
-                <h4>Stage</h4>
-                <p>Subject to final agreement</p>
-              </div>
-              <div class="meta-item">
-                <h4>Focus</h4>
-                <p>Nucleus estate + outgrowers</p>
-              </div>
-              <div class="meta-item">
-                <h4>Products</h4>
-                <p>Carbon, timber, moringa, honey</p>
-              </div>
-            </div>
-          <button class="expand-btn" aria-expanded="false">
-            View full details
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          </div>
-        </div>
-
-          <div class="project-details">
-            <div class="details-inner">
-            <div class="detail-block">
-              <h4>Objectives</h4>
-              <ul>
-                <li>Develop a scalable nucleus forestry estate</li>
-                <li>Establish conservation corridors</li>
-                <li>Create commercial outgrower & smallholder programmes</li>
-                <li>Develop carbon assets</li>
-                <li>Build nursery and processing infrastructure</li>
-              </ul>
-            </div>
-            <div class="detail-block">
-              <h4>Environmental Benefits</h4>
-              <ul>
-                <li>Large-scale tree establishment</li>
-                <li>Restoration of degraded land</li>
-                <li>Improved soil cover and infiltration</li>
-                <li>Habitat connectivity</li>
-                <li>Reduced pressure on natural forests</li>
-              </ul>
-            </div>
-            <div class="detail-block">
-              <h4>Revenue Model</h4>
-              <p>Carbon, poles, sustainable timber, moringa, honey and other compatible products. Detailed economics remain confidential.</p>
-            </div>
-            <div class="detail-block">
-              <h4>Current Status</h4>
-              <p>Partnership concept under development. Public wording must be approved by SEKU before launch.</p>
-            </div>
-            <div class="project-cta">
-              <div class="cta-box">
-                <p>Detailed project information is available to qualified partners following an introductory discussion and confidentiality agreement.</p>
-                <a href="#contact" class="btn-primary">Request information →</a>
-              </div>
+          <div class="project-title-block">
+            <h3>SEKU Dryland Forestry Partnership</h3>
+            <div class="project-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              South-eastern Kenya
             </div>
           </div>
         </div>
-      </article>
-
-      <!-- 4.3 Pipeline -->
-      <article class="project-card" data-stage="pipeline">
-        <div class="project-header">
-          <div class="project-visual" style="background: linear-gradient(145deg, #1e2a4a, #2c3e6b);">
-            <span class="stage-badge stage-pipeline">Origination & Partner Engagement</span>
-            <div class="project-title-block">
-          <h3>Institutional Land & Forest Restoration Pipeline</h3>
-          <div class="project-location">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Kenya · Coastal & ASAL landscapes
-              </div>
+        <div class="project-body">
+          <p class="project-desc">
+            A proposed long-term institutional land partnership combining dryland commercial forestry, carbon, agroforestry, restoration, research and local value addition.
+          </p>
+          <div class="meta-grid">
+            <div class="meta-item">
+              <h4>Stage</h4>
+              <p>Subject to final agreement</p>
             </div>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">
-              A pipeline of potential partnerships with universities, public institutions, forest authorities, development authorities and large landowners.
-            </p>
-            <div class="meta-grid">
-              <div class="meta-item">
-                <h4>Focus</h4>
-                <p>Degraded & underutilised land</p>
-              </div>
-              <div class="meta-item">
-                <h4>Model</h4>
-                <p>Long-term transparent agreements</p>
-              </div>
-              <div class="meta-item">
-                <h4>Status</h4>
-                <p>Selected opportunities under discussion</p>
-              </div>
+            <div class="meta-item">
+              <h4>Focus</h4>
+              <p>Nucleus estate + outgrowers</p>
+            </div>
+            <div class="meta-item">
+              <h4>Products</h4>
+              <p>Carbon, timber, moringa, honey</p>
+            </div>
           </div>
           <button class="expand-btn" aria-expanded="false">
             View full details
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
+        </div>
+      </div>
+
+      <div class="project-details">
+        <div class="details-inner">
+          <div class="detail-block">
+            <h4>Objectives</h4>
+            <ul>
+              <li>Develop a scalable nucleus forestry estate</li>
+              <li>Establish conservation corridors</li>
+              <li>Create commercial outgrower & smallholder programmes</li>
+              <li>Develop carbon assets</li>
+              <li>Build nursery and processing infrastructure</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Environmental Benefits</h4>
+            <ul>
+              <li>Large-scale tree establishment</li>
+              <li>Restoration of degraded land</li>
+              <li>Improved soil cover and infiltration</li>
+              <li>Habitat connectivity</li>
+              <li>Reduced pressure on natural forests</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Revenue Model</h4>
+            <p>Carbon, poles, sustainable timber, moringa, honey and other compatible products. Detailed economics remain confidential.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Current Status</h4>
+            <p>Partnership concept under development. Public wording must be approved by SEKU before launch.</p>
+          </div>
+          <div class="project-cta">
+            <div class="cta-box">
+              <p>Detailed project information is available to qualified partners following an introductory discussion and confidentiality agreement.</p>
+              <a href="contact.html" class="btn-primary">Request information →</a>
+            </div>
           </div>
         </div>
+      </div>
+    </article>
 
-          <div class="project-details">
-            <div class="details-inner">
-            <div class="detail-block">
-              <h4>Objectives</h4>
-              <p>Transform degraded and underutilised land into productive forestry, carbon and biodiversity assets under transparent long-term agreements.</p>
-            </div>
-            <div class="detail-block">
-              <h4>Environmental Benefits</h4>
-              <ul>
-                <li>Restoration & sustainable forestry</li>
-                <li>Assisted natural regeneration</li>
-                <li>Landscape connectivity</li>
-                <li>Community agroforestry</li>
-              </ul>
-            </div>
-            <div class="detail-block">
-              <h4>Revenue Model</h4>
-              <p>Project-specific combinations of carbon, timber, biodiversity, honey, agroforestry and land-value improvement.</p>
-            </div>
-            <div class="detail-block">
-              <h4>Current Status</h4>
-              <p>Selected opportunities are under discussion. Detailed information is available to qualified partners.</p>
-            </div>
-            <div class="project-cta">
-              <div class="cta-box">
-                <p>We welcome discussions with aligned institutional landowners and partners.</p>
-                <a href="#contact" class="btn-primary">Start a conversation →</a>
-              </div>
+    <!-- 4.3 Pipeline -->
+    <article class="project-card" data-stage="pipeline">
+      <div class="project-header">
+        <div class="project-visual" style="background: linear-gradient(145deg, #1e2a4a, #2c3e6b);">
+          <span class="stage-badge stage-pipeline">Origination & Partner Engagement</span>
+          <div class="project-title-block">
+            <h3>Institutional Land & Forest Restoration Pipeline</h3>
+            <div class="project-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Kenya · Coastal & ASAL landscapes
             </div>
           </div>
         </div>
-      </article>
+        <div class="project-body">
+          <p class="project-desc">
+            A pipeline of potential partnerships with universities, public institutions, forest authorities, development authorities and large landowners.
+          </p>
+          <div class="meta-grid">
+            <div class="meta-item">
+              <h4>Focus</h4>
+              <p>Degraded & underutilised land</p>
+            </div>
+            <div class="meta-item">
+              <h4>Model</h4>
+              <p>Long-term transparent agreements</p>
+            </div>
+            <div class="meta-item">
+              <h4>Status</h4>
+              <p>Selected opportunities under discussion</p>
+            </div>
+          </div>
+          <button class="expand-btn" aria-expanded="false">
+            View full details
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+      </div>
 
-      <p class="pipeline-note">
+      <div class="project-details">
+        <div class="details-inner">
+          <div class="detail-block">
+            <h4>Objectives</h4>
+            <p>Transform degraded and underutilised land into productive forestry, carbon and biodiversity assets under transparent long-term agreements.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Environmental Benefits</h4>
+            <ul>
+              <li>Restoration & sustainable forestry</li>
+              <li>Assisted natural regeneration</li>
+              <li>Landscape connectivity</li>
+              <li>Community agroforestry</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Revenue Model</h4>
+            <p>Project-specific combinations of carbon, timber, biodiversity, honey, agroforestry and land-value improvement.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Current Status</h4>
+            <p>Selected opportunities are under discussion. Detailed information is available to qualified partners.</p>
+          </div>
+          <div class="project-cta">
+            <div class="cta-box">
+              <p>We welcome discussions with aligned institutional landowners and partners.</p>
+              <a href="contact.html" class="btn-primary">Start a conversation →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <p class="pipeline-note">
       Detailed project information, maps, commercial assumptions and capital requirements are available to qualified partners following an introductory discussion and, where appropriate, a confidentiality agreement.
-      </p>
+    </p>
 
   </div>
 </section>
+
+<!-- FOOTER -->
+<div id="footer"></div>
 
 <script>
-  // Mobile menu
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
+  // ===== Load shared header + footer =====
+  async function loadPartial(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(url + ' not found');
+      el.innerHTML = await res.text();
+    } catch (err) {
+      console.error('Could not load partial:', err);
+    }
+  }
 
-  // Expand / Collapse – identical behaviour to the reference
+  Promise.all([
+    loadPartial('header', 'header.html'),
+    loadPartial('footer', 'footer.html')
+  ]).then(() => {
+    // Mobile menu — only after header exists
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Active nav link
+    const path = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href.split('/').pop() === path) {
+        a.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<script>
+  // Expand / Collapse – FIXED: find .project-details inside the same card
   document.querySelectorAll('.expand-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const details = btn.nextElementSibling;
+      const card = btn.closest('.project-card');
+      const details = card.querySelector('.project-details');
+      if (!details) return;
+
       const isOpen = details.classList.contains('open');
 
       details.classList.toggle('open');
       btn.classList.toggle('open');
-      btn.setAttribute('aria-expanded', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
 
       btn.innerHTML = isOpen
         ? `View full details <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`
@@ -692,28 +773,31 @@
     });
   });
 
-    // Stage filter
-    const stageBtns = document.querySelectorAll('.stage-btn');
-    const cards = document.querySelectorAll('.project-card');
+  // Stage filter
+  const stageBtns = document.querySelectorAll('.stage-btn');
+  const cards = document.querySelectorAll('.project-card');
 
-    stageBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        stageBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+  stageBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      stageBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-        const stage = btn.dataset.stage;
+      const stage = btn.dataset.stage;
 
-        cards.forEach(card => {
-          if (stage === 'all' || card.dataset.stage === stage) {
-            card.style.display = 'block';
-            setTimeout(() => card.style.opacity = '1', 10);
-          } else {
-            card.style.opacity = '0';
-            setTimeout(() => card.style.display = 'none', 300);
-          }
-        });
+      cards.forEach(card => {
+        if (stage === 'all' || card.dataset.stage === stage) {
+          card.style.display = 'block';
+          requestAnimationFrame(() => { card.style.opacity = '1'; });
+        } else {
+          card.style.opacity = '0';
+          setTimeout(() => {
+            if (card.style.opacity === '0') card.style.display = 'none';
+          }, 300);
+        }
       });
     });
+  });
 </script>
+
 </body>
 </html>

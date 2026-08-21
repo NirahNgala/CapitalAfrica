@@ -20,80 +20,95 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
   <style>
-    /* Extra styles needed for the cinematic hero */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 700px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .hero-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%) scale(1.08);
-      object-fit: cover;
-      z-index: 0;
-      will-change: transform;
-      filter: contrast(1.08) saturate(1.12) brightness(1.03);
+  /* ===== Cinematic Hero with Slideshow + Parallax ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: white;
 }
 
-    .hero-overlay {
+/* Wrapper that will receive the parallax movement */
+.hero-bg-wrapper {
+  position: absolute;
+  inset: -15% 0;          /* extra height so parallax has room to move */
+  z-index: 0;
+  will-change: transform;
+}
+
+/* Individual background slides */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+}
+
+.hero-bg.active {
+  opacity: 1;
+}
+
+/* Dark overlay for text readability */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
-    105deg,
-    rgba(18, 63, 70, 0.68) 0%,
-    rgba(18, 63, 70, 0.45) 55%,
-    rgba(18, 63, 70, 0.32) 100%
+    to bottom,
+    rgba(18, 63, 70, 0.55) 0%,
+    rgba(18, 63, 70, 0.35) 50%,
+    rgba(18, 63, 70, 0.6) 100%
   );
+  z-index: 1;
 }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 820px;
-      color: white;
-      padding: 0 1.5rem;
-    }
+/* Content stays sharp on top */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
 
-    .hero-title {
-      font-size: clamp(2.3rem, 5.2vw, 4.1rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.4rem;
-    }
+.hero-title {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  color: white;
+}
 
-    .hero-sub {
-      font-size: 1.15rem;
-      opacity: 0.92;
-      max-width: 540px;
-      margin-bottom: 2.4rem;
-      line-height: 1.65;
-    }
+.hero-sub {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  opacity: 0.95;
+  margin-bottom: 2.25rem;
+  max-width: 560px;
+}
 
-    .hero-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-    }
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-    .btn-outline {
-      background: transparent;
-      color: white;
-      border: 1.5px solid rgba(255,255,255,0.7);
-    }
-    .btn-outline:hover {
-      background: white;
-      color: var(--teal);
-      border-color: white;
-    }
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .hero {
+    height: 85vh;
+    min-height: 540px;
+  }
+  .hero-btns {
+    flex-direction: column;
+  }
+  .hero-btns .btn {
+    width: 100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -130,23 +145,30 @@
     </div>
   </header>
 
-  <!-- CINEMATIC HERO (Glasfurd & Walker style) -->
-  <section class="hero" id="hero">
-    <video class="hero-video" autoplay muted loop playsinline poster="images/TREASURE TREES.JPG">
-      <source src="images/DJI_0279_compressed.mp" type="video/mp4">
-    </video>
+  <!-- CINEMATIC HERO with rotating backgrounds + parallax -->
+<section class="hero" id="hero">
 
-    <div class="hero-overlay"></div>
+  <!-- Background layers  -->
+  <div class="hero-bg-wrapper">
+  <div class="hero-bg active" style="background-image: url('images/Koromi-12.jpg');"></div>
+  <div class="hero-bg active" style="background-image: url('images/KoromiFarm.JPG');"></div>
+  <div class="hero-bg" style="background-image: url('images/Koromi-10.jpg');"></div>
+  <div class="hero-bg" style="background-image: url('images/TREASURE\ TREES.JPG');"></div>
+    <!-- Optional: you can also use <video> instead of background-image -->
+  </div>
 
-    <div class="container hero-content">
-      <h1 class="hero-title">Building Investable<br>Natural Capital Projects<br>in East Africa</h1>
-      <p class="hero-sub">Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects.</p>
-      <div class="hero-btns">
-        <a href="koromi.html" class="btn btn-copper">Explore Koromi Farm →</a>
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content">
+    <h1 class="hero-title">Building Investable<br>Natural Capital Projects<br>in East Africa</h1>
+    <p class="hero-sub">Capital Africa originates, develops and operates forestry, carbon, biodiversity and regenerative land-use projects.</p>
+    <div class="hero-btns">
+      <a href="koromi.html" class="btn btn-copper">Explore Koromi Farm →</a>
       <a href="contact.html" class="btn btn-teal">Discuss a Partnership</a>
-      </div>
     </div>
-  </section>
+  </div>
+
+</section>
 
   <!-- INTRO -->
   <section class="intro">
@@ -525,5 +547,40 @@
       }
     });
   </script>
+  <script>
+  // ===== Hero Slideshow =====
+  const slides = document.querySelectorAll('.hero-bg');
+  let currentSlide = 0;
+  const slideInterval = 4000; // change every 4 seconds
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+
+  setInterval(nextSlide, slideInterval);
+
+
+  // ===== Parallax on scroll =====
+  const heroBgWrapper = document.querySelector('.hero-bg-wrapper');
+
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    // Adjust the 0.35 value to make parallax stronger or weaker
+    const rate = scrolled * 0.35;
+    heroBgWrapper.style.transform = `translate3d(0, ${rate}px, 0)`;
+  }
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+
+
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Stop slideshow and parallax
+    clearInterval(nextSlide);
+    window.removeEventListener('scroll', updateParallax);
+  }
+</script>
 </body>
 </html>

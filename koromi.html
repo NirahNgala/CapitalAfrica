@@ -353,49 +353,98 @@
       display: none;
     }
 
-    /* ===== Why Koromi block ===== */
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
+ /* ===== Why Koromi Matters ===== */
+.koromi-matters {
+  padding: 5rem 0;
+  background: var(--warm-white);
+}
 
-    .why-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--copper);
-      transition: all 0.3s ease;
-    }
+.koromi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
 
-    .why-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 32px rgba(18, 63, 70, 0.12);
-    }
+.koromi-text .section-title {
+  margin-bottom: 1.25rem;
+}
 
-    .why-card h3 {
-      color: var(--teal);
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
+.koromi-text p {
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  max-width: 540px;
+}
 
-    .why-card p {
-      color: var(--muted);
-      font-size: 0.97rem;
-      margin: 0;
-    }
+.koromi-text p:last-child {
+  margin-bottom: 0;
+}
 
-    @media (max-width: 768px) {
-      .why-grid { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
+/* Map container */
+.koromi-map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.koromi-map {
+  width: 100%;
+  max-width: 480px;
+  transform-style: preserve-3d;
+  animation: gentleSwing 9s ease-in-out infinite;
+}
+
+.koromi-map img {
+  width: 100%;
+  height: auto;
+  display: block;
+ transform: rotateX(10deg); /* slight tilt for depth */
+}
+
+/* Gentle left-right swing */
+@keyframes gentleSwing {
+  0% {
+    transform: rotateY(-22deg);
+  }
+  50% {
+    transform: rotateY(22deg);
+  }
+  100% {
+    transform: rotateY(-22deg);
+  }
+}
+
+/* Pause on hover so users can inspect the map */
+.koromi-map-wrapper:hover .koromi-map {
+  animation-play-state: paused;
+}
+
+/* ========== Mobile ========== */
+@media (max-width: 900px) {
+  .koromi-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .koromi-map {
+    max-width: 380px;
+    animation-duration: 8s;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .koromi-map {
+    animation: none;
+  }
+}
   </style>
 </head>
 <body>
 
-  <!-- Header (keep yours) -->
+  <!-- Header -->
   <header class="nav">
     <div class="container nav-inner">
       <a href="index.html" class="logo">
@@ -493,7 +542,7 @@
 
       <!-- Medium -->
       <div class="gallery-item" data-caption="Nursery production">
-        <img src="images/koromi/nursery.jpg" alt="Nursery" loading="lazy">
+        <img src="images/IMG_20201231_072831_368 (1).jpg" alt="Nursery" loading="lazy">
         <div class="gallery-overlay">
           <span>Nursery systems</span>
         </div>
@@ -501,7 +550,7 @@
 
       <!-- Wide -->
       <div class="gallery-item gallery-item--wide" data-caption="Biodiversity corridors and natural vegetation">
-        <img src="images/koromi/biodiversity.jpg" alt="Biodiversity" loading="lazy">
+        <img src="images/Valley-2.jpg" alt="Biodiversity" loading="lazy">
         <div class="gallery-overlay">
           <span>Biodiversity & natural vegetation</span>
         </div>
@@ -509,7 +558,7 @@
 
       <!-- Small -->
       <div class="gallery-item" data-caption="Water infrastructure">
-        <img src="images/koromi/water.jpg" alt="Water systems" loading="lazy">
+        <img src="images/4988f5c3-b909-4b7f-8230-775dad032bc7.jpeg" alt="Water systems" loading="lazy">
         <div class="gallery-overlay">
           <span>Water management</span>
         </div>
@@ -525,7 +574,7 @@
 
       <!-- Tall -->
       <div class="gallery-item gallery-item--tall" data-caption="Enrichment planting and restoration">
-        <img src="images/Dilemma-5.jpg" alt="Restoration" loading="lazy">
+        <img src="images/TREASURE TREES.JPG" alt="Restoration" loading="lazy">
         <div class="gallery-overlay">
           <span>Restoration & enrichment</span>
         </div>
@@ -533,7 +582,7 @@
 
       <!-- Medium -->
       <div class="gallery-item" data-caption="Landscape overview">
-        <img src="images/koromi/overview.jpg" alt="Overview" loading="lazy">
+        <img src="images/Arabuko-20.jpg" alt="Overview" loading="lazy">
         <div class="gallery-overlay">
           <span>Managed landscape</span>
         </div>
@@ -587,13 +636,27 @@
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <h2 class="section-title">Why Koromi Matters</h2>
-      <p style="color:var(--muted); max-width:720px; margin-bottom:1.5rem;">Koromi gives Capital Africa practical knowledge that cannot be obtained from feasibility studies alone. It allows the company to test forestry systems, water solutions, species combinations, restoration methods and monitoring approaches before applying them at larger scale.</p>
-      <p style="color:var(--muted); max-width:720px;">For investors and partners, Koromi demonstrates that Capital Africa understands the realities of dryland land development: variable rainfall, seedling losses, fire risk, nursery timing, biodiversity trade-offs, maintenance requirements and the need for long-term local management.</p>
+ <section class="koromi-matters">
+  <div class="container">
+    <div class="koromi-grid">
+      
+      <!-- Text -->
+      <div class="koromi-text">
+        <h2 class="section-title">Why Koromi Matters</h2>
+        <p>Koromi gives Capital Africa practical knowledge that cannot be obtained from feasibility studies alone. It allows the company to test forestry systems, water solutions, species combinations, restoration methods and monitoring approaches before applying them at larger scale.</p>
+        <p>For investors and partners, Koromi demonstrates that Capital Africa understands the realities of dryland land development: variable rainfall, seedling losses, fire risk, nursery timing, biodiversity trade-offs, maintenance requirements and the need for long-term local management.</p>
+      </div>
+
+      <!-- Animated Map -->
+      <div class="koromi-map-wrapper">
+        <div class="koromi-map">
+          <img src="images/Kopie_van_CA_-_Landmark_map-removebg-preview.png" alt="3D topographic map of Koromi showing rivers, roads and project boundaries" />
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>

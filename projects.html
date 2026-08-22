@@ -10,12 +10,22 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* ===== Projects page enhancements ===== */
+
+
     .page-hero--projects {
-      background: linear-gradient(135deg, #0f2a1a 0%, #1a3c2a 100%);
-      padding: 7rem 0 5rem;
-      color: white;
-      text-align: center;
-    }
+  padding: 7rem 0 5rem;
+  color: white;
+  text-align: center;
+  position: relative;
+  background: 
+    linear-gradient(to bottom, rgba(15, 42, 26, 0.75) 0%, rgba(15, 42, 26, 0.55) 100%),
+    url('images/atfarm3.jpeg') center / cover no-repeat;
+}
+
+.page-hero--projects .container {
+  position: relative;
+  z-index: 1;
+}
     .page-hero--projects h1 {
       font-size: clamp(2.4rem, 5vw, 3.4rem);
       font-weight: 700;
@@ -131,7 +141,7 @@
     }
 
     .project-visual {
-      background: linear-gradient(145deg, var(--green-800), var(--green-700));
+      background: url("images/TREASURE\ TREES.JPG") center / cover no-repeat;
       min-height: 280px;
       position: relative;
       display: flex;
@@ -187,8 +197,9 @@
     }
 
     .project-location {
+      color: #98d52e;
       font-size: 0.95rem;
-      opacity: 0.9;
+      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -217,14 +228,14 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--gray-500);
+      color: blueviolet;
       margin-bottom: 0.35rem;
     }
 
     .meta-item p {
       font-size: 0.95rem;
       font-weight: 500;
-      color: var(--earth-900);
+      color: black;
     }
 
     .expand-btn {
@@ -440,11 +451,12 @@
 <body>
 
 <div id="header"></div>
+
 <!-- Hero -->
 <section class="page-hero--projects">
   <div class="container">
-    <div class="hero-label">Natural Capital Portfolio</div>
-    <h1>Projects organised by development stage</h1>
+    <div class="hero-label"></div>
+    <h1>Projects</h1>
     <p>Capital Africa distinguishes clearly between operational assets, projects in formal development, and early-stage pipeline opportunities.</p>
   </div>
 </section>

@@ -17,8 +17,8 @@
   color: white;
   text-align: center;
   position: relative;
-  background: 
-    linear-gradient(to bottom, rgba(15, 42, 26, 0.75) 0%, rgba(15, 42, 26, 0.55) 100%),
+  background:
+    linear-gradient(to bottom, rgba(19, 52, 32, 0.75) 0%, rgba(15, 42, 26, 0.55) 100%),
     url('images/atfarm3.jpeg') center / cover no-repeat;
 }
 
@@ -139,16 +139,44 @@
         grid-template-columns: 1.1fr 1fr;
       }
     }
+.project-visual,
+.project-visual1,
+.project-visual2 {
+  min-height: 280px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.75rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    .project-visual {
-      background: url("images/TREASURE\ TREES.JPG") center / cover no-repeat;
-      min-height: 280px;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.75rem;
-    }
+/* Koromi */
+.project-visual {
+  background-image: url("images/TREASURE TREES.JPG");
+}
 
+/* SEKU – use a different project photo if you have one */
+.project-visual1 {
+  background-image: url("images/atfarm3.jpeg");
+}
+
+/* Pipeline */
+.project-visual2 {
+  background-image: url("images/Koromi-12.jpg");
+}
+
+/* Dark gradient so white text stays readable */
+.project-visual::after,
+.project-visual1::after,
+.project-visual2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 42, 26, 0.75) 0%, transparent 60%);
+  pointer-events: none;
+}
     .project-visual::after {
       content: '';
       position: absolute;
@@ -560,7 +588,7 @@
     <!-- 4.2 SEKU Partnership -->
     <article class="project-card" data-stage="development">
       <div class="project-header">
-        <div class="project-visual" style="background: linear-gradient(145deg, #3d2e1a, #5c4528);">
+        <div class="project-visual1">
           <span class="stage-badge stage-development">In Development</span>
           <div class="project-title-block">
             <h3>SEKU Dryland Forestry Partnership</h3>
@@ -638,7 +666,7 @@
     <!-- 4.3 Pipeline -->
     <article class="project-card" data-stage="pipeline">
       <div class="project-header">
-        <div class="project-visual" style="background: linear-gradient(145deg, #1e2a4a, #2c3e6b);">
+        <div class="project-visual2">
           <span class="stage-badge stage-pipeline">Origination & Partner Engagement</span>
           <div class="project-title-block">
             <h3>Institutional Land & Forest Restoration Pipeline</h3>

@@ -19,176 +19,6 @@
     }
 
 
-/* ===== Logo ===== */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  min-width: 0;                 /* allows shrinking */
-  flex-shrink: 1;
-}
-
-.logo-img {
-  height: 80px;
-  width: 80px;
-  object-fit: cover;
-  border-radius: 50%;           /* matches the circular look in your screenshot */
-  flex-shrink: 0;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  min-width: 0;
-}
-
-.logo-text {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--teal);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.logo-text span {
-  font-weight: 500;
-  color: var(--muted);
-  font-size: 0.7rem;
-  white-space: nowrap;
-}
-
-/* ===== Nav container ===== */
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  gap: 0.75rem;
-}
-
-/* Desktop links + button */
-.nav-links {
-  display: flex;
-  gap: 1.75rem;
-  list-style: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
-}
-
-.btn {
-  display: inline-flex;
-  padding: 0.65rem 1.25rem;
-  border-radius: 26px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.btn-copper {
-  background: var(--copper);
-  color: white;
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
-  flex-shrink: 0;
-}
-
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--teal);
-  transition: all 0.3s ease;
-  transform-origin: center;
-}
-
-/* Hamburger → X */
-.hamburger.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ========== MOBILE (≤ 900px) ========== */
-@media (max-width: 900px) {
-  /* Hide the desktop Partner button */
-  .nav-inner > .btn-copper {
-    display: none;
-  }
-
-  /* Show hamburger */
-  .hamburger {
-    display: flex;
-  }
-
-  /* Slide-in menu from the right */
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: min(300px, 82vw);
-    background: var(--white);
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 5.5rem 1.75rem 2rem;
-    gap: 1.25rem;
-    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-  }
-
-  .nav-links.open {
-    transform: translateX(0);
-  }
-
-  .nav-links a {
-    font-size: 1.1rem;
-    padding: 0.35rem 0;
-  }
-
-  /* Slightly smaller logo text on mobile */
-  .logo-text {
-    font-size: 0.95rem;
-  }
-  .logo-text span {
-    font-size: 0.65rem;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 380px) {
-  .logo-img {
-    height: 36px;
-    width: 36px;
-  }
-  .logo-text {
-    font-size: 0.9rem;
-  }
-}
-
     .process-steps { display: grid; gap: 1.25rem; }
     .step { display: grid; grid-template-columns: 70px 1fr; gap: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); }
     .step-num { width: 50px; height: 50px; background: var(--teal); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
@@ -216,18 +46,24 @@
       .step { grid-template-columns: 1fr; }
     }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--warm-white);
-      color: var(--charcoal);
-      line-height: 1.6;
-      font-size: 16px;
-      overflow-x: hidden;
-    }
+/* ===== Logo ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  line-height: 0;
+}
 
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1140px, 92%); margin: 0 auto; }
+.logo-img {
+  height: 90px;           /* readable size */
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
+}
+
+
 
     /* ========== NAV ========== */
     .nav {
@@ -244,62 +80,6 @@
       justify-content: space-between;
       height: 72px;
       gap: 1.5rem;
-    }
-   .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;                  /* space between logo and text */
-  text-decoration: none;
-  color: var(--teal);
-}
-
-.logo-img {
-  height: 42px;               /* adjust size if needed */
-  width: auto;
-  display: block;
-  flex-shrink: 0;
-  border-radius: 14px;          /* optional: rounded corners */
-}
-
-.logo-text {
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-.logo-text span {
-  display: block;
-  font-weight: 500;
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 1px;
-}
-
-/* Optional: smaller on mobile */
-@media (max-width: 600px) {
-  .logo-img {
-    height: 36px;
-  }
-  .logo-text {
-    font-size: 1.05rem;
-  }
-  .logo-text span {
-    font-size: 0.72rem;
-  }
-}
-    .nav-links {
-      display: flex;
-      gap: 1.75rem;
-      list-style: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    .nav-links a:hover { color: var(--teal); }
-    .nav-links a {
-  position: relative;
-  padding: 0.35rem 0;
-  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -370,20 +150,47 @@
     .btn-teal { background: var(--teal); color: white; }
     .btn-teal:hover { background: var(--teal-dark); transform: translateY(-1px); }
 
+   /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
+  justify-content: center;
       gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+  padding: 8px;
+  z-index: 1001;
+  flex-shrink: 0;
     }
+
     .hamburger span {
+  display: block;
       width: 22px;
       height: 2px;
       background: var(--teal);
-      display: block;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Hamburger → X */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+ body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
     }
 
    

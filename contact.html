@@ -349,25 +349,58 @@
 
   <div id="footer"></div>
 
-  <script>
-    // Load shared header + footer
-    async function loadPartial(id, url) {
-      const response = await fetch(url);
-      const html = await response.text();
-      document.getElementById(id).innerHTML = html;
+<script>
+  async function loadPartial(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(url + ' not found');
+      el.innerHTML = await res.text();
+    } catch (err) {
+      console.error('Could not load partial:', err);
     }
+  }
 
-    loadPartial('header', 'header.html');
-    loadPartial('footer', 'footer.html');
-
+  Promise.all([
+    loadPartial('header', 'header.html'),
+    loadPartial('footer', 'footer.html')
+  ]).then(() => {
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    if (hamburger && navLinks) {
-      hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('open'));
-      });
+    const navLinks  = document.getElementById('navLinks');
+    const overlay   = document.getElementById('navOverlay');
+
+    if (!hamburger || !navLinks) {
+      console.error('Menu elements not found – check header.html');
+      return;
     }
-  </script>
+
+    function toggleMenu() {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      if (overlay) overlay.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', toggleMenu);
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) toggleMenu();
+      });
+    });
+
+    // Highlight current page
+    const path = location.pathname.split('/').pop() || 'index.html';
+    navLinks.querySelectorAll('a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href.split('/').pop() === path) {
+        a.classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>

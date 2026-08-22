@@ -99,7 +99,7 @@
 /* Mobile adjustments */
 @media (max-width: 600px) {
   .hero {
-    height: 85vh;
+    height: 50vh;
     min-height: 540px;
   }
   .hero-btns {
@@ -112,6 +112,7 @@
   </style>
 </head>
 <body>
+
 <div id="header"></div>
 
   <!-- CINEMATIC HERO with rotating backgrounds + parallax -->
@@ -259,48 +260,55 @@
   </div>
 </section>
  
-<!-- THEMES -->
 <section class="themes-section">
   <div class="container">
     <header class="section-header">
+      <p class="section-eyebrow">Focus areas</p>
       <h2 class="section-title">Investment Themes</h2>
-      <p class="section-sub">Focused on commercially viable and ecologically suitable systems.</p>
+      <p class="section-sub">
+        Commercially viable systems grounded in ecology, land suitability and long-term value creation.
+      </p>
     </header>
 
     <div class="themes-grid">
-      <div class="theme-card">
-        <div class="theme-accent"></div>
+      <article class="theme-card">
+        <span class="theme-number">01</span>
         <h3>Commercial dryland forestry</h3>
-      </div>
+        <p>Managed timber systems suited to arid and semi-arid landscapes.</p>
+      </article>
 
-      <div class="theme-card">
-        <div class="theme-accent"></div>
-        <h3>Afforestation, reforestation & carbon removals</h3>
-      </div>
+      <article class="theme-card">
+        <span class="theme-number">02</span>
+        <h3>Afforestation, reforestation &amp; carbon removals</h3>
+        <p>High-integrity carbon projects built on real land and operations.</p>
+      </article>
 
-      <div class="theme-card">
-        <div class="theme-accent"></div>
-        <h3>Assisted natural regeneration & indigenous woodland restoration</h3>
-      </div>
+      <article class="theme-card">
+        <span class="theme-number">03</span>
+        <h3>Assisted natural regeneration &amp; indigenous woodland</h3>
+        <p>Restoring native systems with lower input and strong ecological returns.</p>
+      </article>
 
-      <div class="theme-card">
-        <div class="theme-accent"></div>
+      <article class="theme-card">
+        <span class="theme-number">04</span>
         <h3>Biodiversity and habitat recovery</h3>
-      </div>
+        <p>Landscape-scale recovery that supports species, soils and resilience.</p>
+      </article>
 
-      <div class="theme-card">
-        <div class="theme-accent"></div>
+      <article class="theme-card">
+        <span class="theme-number">05</span>
         <h3>Agroforestry and resilient perennial crops</h3>
-      </div>
+        <p>Moringa, cashew and other systems that combine income with tree cover.</p>
+      </article>
 
-      <div class="theme-card">
-        <div class="theme-accent"></div>
-        <h3>Integrated landscape projects with multiple revenue streams</h3>
-      </div>
+      <article class="theme-card">
+        <span class="theme-number">06</span>
+        <h3>Integrated landscape projects</h3>
+        <p>Multiple revenue streams — timber, carbon, agroforestry and more — under one structure.</p>
+      </article>
     </div>
   </div>
 </section>
-
   <!-- PROJECTS -->
   <section>
     <div class="container">
@@ -353,105 +361,106 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 <script>
-    // ===== Load shared header + footer =====
-    async function loadPartial(id, url) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(url + ' not found');
-        el.innerHTML = await res.text();
-      } catch (err) {
-        console.error('Could not load partial:', err);
-      }
-    }
-
-    Promise.all([
-      loadPartial('header', 'header.html'),
-      loadPartial('footer', 'footer.html')
-    ]).then(() => {
-    });
-
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-const overlay = document.getElementById('navOverlay');
-
-function toggleMenu() {
-  const isOpen = navLinks.classList.toggle('open');
-  hamburger.classList.toggle('active');
-  overlay.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  async function loadPartial(id, url) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(url + ' not found');
+    el.innerHTML = await res.text();
+  } catch (err) {
+    console.error('Could not load partial:', err);
+  }
 }
 
-hamburger.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', toggleMenu);
+Promise.all([
+  loadPartial('header', 'header.html'),
+  loadPartial('footer', 'footer.html')
+]).then(() => {
+  // ===== Mobile menu (must run after header exists) =====
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  const overlay   = document.getElementById('navOverlay');
 
-// Close when a link is clicked
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (navLinks.classList.contains('open')) toggleMenu();
+  if (hamburger && navLinks && overlay) {
+    function toggleMenu() {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      overlay.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) toggleMenu();
+      });
+    });
+  }
+
+  // Active nav link
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href && href.split('/').pop() === path) {
+      a.classList.add('active');
+    }
   });
-}); 
-    // ===== Hero slideshow (only one active at a time) =====
-    const slides = document.querySelectorAll('.hero-bg');
-    let currentSlide = 0;
+});
 
-    function nextSlide() {
-      if (!slides.length) return;
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }
+// ===== Hero slideshow + parallax (can stay outside) =====
+const slides = document.querySelectorAll('.hero-bg');
+let currentSlide = 0;
 
-    // ===== Parallax =====
-    const heroBgWrapper = document.querySelector('.hero-bg-wrapper');
+function nextSlide() {
+  if (!slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('active');
+}
 
-    function updateParallax() {
-      if (!heroBgWrapper) return;
-      const rate = window.pageYOffset * 0.35;
-      heroBgWrapper.style.transform = `translate3d(0, ${rate}px, 0)`;
-    }
+const heroBgWrapper = document.querySelector('.hero-bg-wrapper');
+function updateParallax() {
+  if (!heroBgWrapper) return;
+  const rate = window.pageYOffset * 0.35;
+  heroBgWrapper.style.transform = `translate3d(0, ${rate}px, 0)`;
+}
 
-    // ===== Lenis + GSAP =====
-    if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
-      const lenis = new Lenis({
-        duration: 1.4,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
+if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
+  const lenis = new Lenis({
+    duration: 1.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  gsap.registerPlugin(ScrollTrigger);
 
-      gsap.registerPlugin(ScrollTrigger);
+  gsap.from('.hero-title', {
+    y: 90, opacity: 0, duration: 1.5, ease: 'power3.out', delay: 0.2
+  });
+  gsap.from('.hero-sub, .hero-btns', {
+    y: 50, opacity: 0, duration: 1.3, ease: 'power3.out', delay: 0.55, stagger: 0.12
+  });
+  gsap.to('.hero-content', {
+    yPercent: -18, scale: 0.90, opacity: 0.25, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.4 }
+  });
+}
 
-      gsap.from('.hero-title', {
-        y: 90, opacity: 0, duration: 1.5, ease: 'power3.out', delay: 0.2
-      });
-      gsap.from('.hero-sub, .hero-btns', {
-        y: 50, opacity: 0, duration: 1.3, ease: 'power3.out', delay: 0.55, stagger: 0.12
-      });
-      gsap.to('.hero-content', {
-        yPercent: -18, scale: 0.90, opacity: 0.25, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.4 }
-      });
-    }
-
-    // Start slideshow + parallax 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      slideTimer = setInterval(nextSlide, 4000);
-      window.addEventListener('scroll', updateParallax, { passive: true });
-    }
-  </script>
-</body>
-
-</body>
-</html>
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  setInterval(nextSlide, 4000);
+  window.addEventListener('scroll', updateParallax, { passive: true });
+}
+</script>

@@ -46,13 +46,6 @@ a {
     footer ul { list-style: none; }
     footer li { margin-bottom: 0.45rem; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
-    @media (max-width: 900px) {
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
-      .nav-links.open { display: flex; }
-      .hamburger { display: flex; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .step { grid-template-columns: 1fr; }
-    }
 
 
 .logo {
@@ -102,21 +95,10 @@ a {
 
 .nav-links a {
   position: relative;
-  font-size: 0.92rem;
   font-weight: 500;
   color: var(--charcoal);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
-
-.nav-links a:hover {
-  color: var(--teal);
-}
-
-.nav-links a.active {
-  color: var(--teal);
-  font-weight: 600;
-}
-
 .nav-links a.active::after {
   content: '';
   position: absolute;
@@ -210,7 +192,7 @@ a {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 30, 35, 0.45);
+  background: rgb(255, 255, 255);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -223,7 +205,6 @@ a {
   visibility: visible;
 }
 
-/* ========== MOBILE DRAWER (≤ 900px) ========== */
 @media (max-width: 900px) {
   .nav-inner {
     height: 76px;
@@ -235,19 +216,18 @@ a {
   }
 
   .desktop-cta {
-    display: none;
+    display: none;          /* no CTA on mobile */
   }
 
   .hamburger {
     display: flex;
   }
 
-  /* Right-side drawer */
   .nav-links {
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 70vh;
     width: min(320px, 85vw);
     background: var(--white);
     flex-direction: column;
@@ -255,7 +235,6 @@ a {
     justify-content: flex-start;
     gap: 0.35rem;
     padding: 6rem 1.75rem 2.5rem;
-    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.14);
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 1001;
@@ -277,7 +256,6 @@ a {
     transform: translateX(0);
   }
 
-  /* Stagger animation */
   .nav-links.open li:nth-child(1) { transition-delay: 0.05s; }
   .nav-links.open li:nth-child(2) { transition-delay: 0.09s; }
   .nav-links.open li:nth-child(3) { transition-delay: 0.13s; }
@@ -286,15 +264,13 @@ a {
   .nav-links.open li:nth-child(6) { transition-delay: 0.25s; }
   .nav-links.open li:nth-child(7) { transition-delay: 0.29s; }
   .nav-links.open li:nth-child(8) { transition-delay: 0.33s; }
-  .nav-links.open li:nth-child(9) { transition-delay: 0.37s; }
 
   .nav-links a {
     display: block;
     font-size: 1.15rem;
     font-weight: 500;
     padding: 0.85rem 0.5rem;
-    border-radius: 10px;
-    transition: background 0.2s ease, color 0.2s ease;
+    
   }
 
   .nav-links a:hover,
@@ -306,22 +282,7 @@ a {
   .nav-links a.active::after {
     display: none;
   }
-
-  .mobile-cta {
-    display: block;
-    margin-top: 1.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba(18, 63, 70, 0.1);
-  }
-
-  .mobile-cta .btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.95rem;
-    font-size: 1rem;
-  }
 }
-
 @media (max-width: 400px) {
   .logo-img {
     height: 48px;
@@ -330,6 +291,10 @@ a {
 
   .nav-inner {
     height: 70px;
+  }
+
+  .btn {
+    display: none;
   }
 }
 
@@ -446,94 +411,171 @@ a {
       line-height: 1.55;
     }
 
-   /*Investment Themes*/
+/* ===== Investment Themes – mobile first ===== */
 .themes-section {
-  background: var(--white);
-  padding: 4.5rem 0 5rem;
+  background: var(--warm-white);
+  padding: 3.25rem 0 3.75rem;
 }
 
 .themes-section .section-header {
-  text-align: center;
-  margin-bottom: 2.75rem;
+  text-align: left;          /* easier to read on small screens */
+  max-width: 36rem;
+  margin: 0 0 1.75rem;
+}
+
+.section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.45rem;
+}
+
+.themes-section .section-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .themes-section .section-sub {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
-/* Grid */
+/* Grid – 1 column by default */
 .themes-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
 }
 
 /* Card */
 .theme-card {
   position: relative;
-  background: var(--warm-white);
+  background: var(--white);
   border: 1px solid rgba(18, 63, 70, 0.07);
   border-radius: 12px;
-  padding: 1.5rem 1.4rem 1.5rem 1.6rem;
-  transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: default;
+  padding: 1.25rem 1.2rem 1.3rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   overflow: hidden;
 }
 
-/* Left accent bar */
-.theme-accent {
+.theme-card::before {
+  content: '';
   position: absolute;
-  left: 0;
   top: 0;
-  width: 4px;
-  height: 100%;
+  left: 0;
+  right: 0;
+  height: 3px;
   background: var(--olive);
-  transition: background 0.28s ease, width 0.28s ease;
+  opacity: 0.9;
+  transition: background 0.25s ease;
 }
 
-/* Text */
+.theme-number {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--olive);
+  margin-bottom: 0.5rem;
+}
+
 .theme-card h3 {
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--charcoal);
-  line-height: 1.45;
-  margin: 0;
-  transition: color 0.25s ease;
-}
-
-/* Hover state */
-.theme-card:hover {
-  transform: translateY(-5px);
-  background: var(--white);
-  border-color: rgba(198, 106, 50, 0.18);
-  box-shadow: 0 12px 28px rgba(18, 63, 70, 0.09);
-}
-
-.theme-card:hover .theme-accent {
-  background: var(--copper);
-  width: 5px;
-}
-
-.theme-card:hover h3 {
   color: var(--teal);
+  line-height: 1.35;
+  margin: 0 0 0.4rem;
 }
 
-/*Responsive*/
-@media (max-width: 900px) {
+.theme-card p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Hover only when the device supports it */
+@media (hover: hover) {
+  .theme-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(198, 106, 50, 0.2);
+    box-shadow: 0 12px 28px rgba(18, 63, 70, 0.09);
+  }
+
+  .theme-card:hover::before {
+    background: var(--copper);
+  }
+
+  .theme-card:hover .theme-number {
+    color: var(--copper);
+  }
+}
+
+/* ----- Tablet (2 columns) ----- */
+@media (min-width: 600px) {
+  .themes-section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .themes-section .section-header {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.25rem;
+  }
+
+  .themes-section .section-title {
+    font-size: 1.65rem;
+  }
+
+  .themes-section .section-sub {
+    font-size: 1.02rem;
+  }
+
   .themes-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+
+  .theme-card {
+    padding: 1.4rem 1.35rem 1.45rem;
+  }
 }
 
-@media (max-width: 560px) {
+/* ----- Desktop (3 columns) ----- */
+@media (min-width: 960px) {
+  .themes-section {
+    padding: 5rem 0 5.5rem;
+  }
+
+  .themes-section .section-header {
+    margin-bottom: 2.75rem;
+  }
+
+  .themes-section .section-title {
+    font-size: 1.75rem;
+  }
+
   .themes-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
 
   .theme-card {
-    padding: 1.35rem 1.3rem 1.35rem 1.5rem;
+    padding: 1.65rem 1.5rem 1.6rem;
+    border-radius: 14px;
+  }
+
+  .theme-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .theme-card p {
+    font-size: 0.9rem;
   }
 }
 
@@ -542,11 +584,7 @@ a {
   .theme-card {
     transition: none;
   }
-  .theme-card:hover {
-    transform: none;
-  }
 }
-
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -920,19 +958,6 @@ a {
 
     /* Mobile */
     @media (max-width: 900px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        flex-direction: column;
-        padding: 1.25rem 1.5rem 1.5rem;
-        gap: 1rem;
-        border-bottom: 1px solid rgba(18,63,70,0.1);
-      }
-      .nav-links.open { display: flex; }
       .hamburger { display: flex; }
       .pillars { grid-template-columns: 1fr 1fr; }
       .themes-grid { grid-template-columns: 1fr 1fr; }
@@ -985,7 +1010,7 @@ a {
   max-width: 640px;
 }
 section {
-  padding: 4.5rem 0;
+  padding: 2.5rem 0;
 }
 
 /* Partner cards grid (the “table”) */

@@ -6,25 +6,12 @@
   <title>About | Capital Africa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    
+   <style>
+   
   
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1140px, 92%); margin: 0 auto; }
-    .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid rgba(18,63,70,0.08); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 1.5rem; }
-    .logo { font-weight: 700; font-size: 1.25rem; color: var(--teal); }
-    .logo span { font-weight: 500; color: var(--muted); font-size: 0.85rem; display: block; margin-top: -2px; }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; font-size: 0.9rem; font-weight: 500; }
-    .nav-links a:hover { color: var(--teal); }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.4rem; border-radius: 26px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: all 0.2s; }
-    .btn-copper { background: var(--copper); color: white; }
-    .btn-copper:hover { background: #b55a28; }
-    .btn-teal { background: var(--teal); color: white; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-    .hamburger span { width: 22px; height: 2px; background: var(--teal); }
+    
     section { padding: 4.5rem 0; }
     .section-title { font-size: 1.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
     .section-sub { color: var(--muted); margin-bottom: 2.5rem; max-width: 600px; }
@@ -43,18 +30,8 @@
     .leader-card { background: var(--white); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); margin-bottom: 1.25rem; }
     .leader-card h3 { color: var(--teal); margin-bottom: 0.25rem; }
     .leader-role { color: var(--copper); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; }
-    footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem; font-size: 0.9rem; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
-    .footer-brand { color: white; font-weight: 700; font-size: 1.15rem; }
-    .footer-brand span { display: block; font-weight: 400; font-size: 0.85rem; opacity: 0.7; }
-    footer h4 { color: white; font-size: 0.9rem; margin-bottom: 0.9rem; }
-    footer ul { list-style: none; }
-    footer li { margin-bottom: 0.45rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; }
     @media (max-width: 900px) {
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; gap: 1rem; }
-      .nav-links.open { display: flex; }
-      .hamburger { display: flex; }
+      
       .two-col, .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -209,26 +186,6 @@
   <div id="footer"></div>
 
   <script>
-    // ===== Load shared header + footer =====
-    async function loadPartial(id, url) {
-      const response = await fetch(url);
-      const html = await response.text();
-      document.getElementById(id).innerHTML = html;
-    }
-
-    loadPartial('header', 'header.html');
-    loadPartial('footer', 'footer.html');
-
-    // ===== Hamburger menu toggle =====
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-
-      hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-      });
-    });
-
     // ===== Leader card expand/collapse =====
     document.addEventListener('DOMContentLoaded', () => {
       const leaderCards = document.querySelectorAll('.leader-card');
@@ -239,6 +196,58 @@
         });
       });
     });
-  </script>
+
+  async function loadPartial(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(url + ' not found');
+      el.innerHTML = await res.text();
+    } catch (err) {
+      console.error('Could not load partial:', err);
+    }
+  }
+
+  Promise.all([
+    loadPartial('header', 'header.html'),
+    loadPartial('footer', 'footer.html')
+  ]).then(() => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    const overlay   = document.getElementById('navOverlay');
+
+    if (!hamburger || !navLinks) {
+      console.error('Menu elements not found – check header.html');
+      return;
+    }
+
+    function toggleMenu() {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      if (overlay) overlay.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', toggleMenu);
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) toggleMenu();
+      });
+    });
+
+    // Highlight current page
+    const path = location.pathname.split('/').pop() || 'index.html';
+    navLinks.querySelectorAll('a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href.split('/').pop() === path) {
+        a.classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>

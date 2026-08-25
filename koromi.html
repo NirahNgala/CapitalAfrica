@@ -1,769 +1,465 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koromi Farm | Capital Africa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Koromi Farm is Capital Africa's living proof point for dryland forestry and restoration.">
+  <title>Koromi Farm — Capital Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --teal: #123F46;
-      --teal-dark: #0d2e33;
-      --warm-white: #F8F7F2;
-      --white: #FFFFFF;
-      --sandstone: #E7E0D3;
-      --olive: #6F7D54;
-      --copper: #C66A32;
-      --charcoal: #263235;
-      --muted: #687476;
-      --shadow: 0 4px 20px rgba(18, 63, 70, 0.08);
-      --radius: 14px;
+      --ink:#102b2b;
+      --forest:#17453e;
+      --leaf:#8ba55b;
+      --ochre:#e8a44a;
+      --sand:#f4f0e8;
+      --paper:#fbfaf7;
+      --line:rgba(16,43,43,.16);
+      --muted:#617170;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"DM Sans",system-ui,sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .shell { width:min(1200px, calc(100% - 48px)); margin:auto; }
+    .eyebrow { color:var(--leaf); font:500 .73rem/1 "DM Mono",monospace; letter-spacing:.13em; text-transform:uppercase; }
+
+    /* Header */
+    .site-head { position:absolute; z-index:3; left:0; right:0; top:0; color:white; }
+    .nav { height:90px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.22); }
+    .brand { font-weight:700; font-size:1.05rem; letter-spacing:-.03em; }
+    .brand span { display:block; font:400 .59rem/1 "DM Mono",monospace; letter-spacing:.11em; text-transform:uppercase; margin-top:5px; opacity:.75; }
+    .nav-links { display:flex; gap:29px; align-items:center; font-size:.85rem; }
+    .nav-links a:hover { color:#dce9cc; }
+    .menu { display:none; padding:8px; font:inherit; color:white; background:none; border:0; }
+
+    /* Hero */
+    .hero {
+      min-height:765px; display:flex; align-items:flex-end; color:white; isolation:isolate;
+      background:linear-gradient(90deg,rgba(8,33,31,.92) 0%,rgba(11,47,42,.68) 45%,rgba(11,47,42,.23) 100%),
+                 url('https://nirahngala.github.io/CapitalAfrica/images/Koromi-10.jpg') center/cover;
+    }
+    .hero::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(0deg,rgba(6,28,27,.52),transparent 36%); }
+    .hero-inner { padding:160px 0 84px; width:100%; }
+    .hero h1 { margin:22px 0 22px; max-width:790px; font:600 clamp(3.5rem,8vw,7.25rem)/.92 "Playfair Display",Georgia,serif; letter-spacing:-.055em; }
+    .hero-copy { max-width:600px; font-size:1.15rem; line-height:1.62; color:rgba(255,255,255,.88); }
+    .hero-foot { margin-top:66px; display:flex; align-items:center; justify-content:space-between; font:400 .71rem/1.4 "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .hero-foot a { border-bottom:1px solid currentColor; padding-bottom:5px; }
+
+    /* Intro + metrics */
+    .intro { padding:120px 0 102px; }
+    .split { display:grid; grid-template-columns:1fr 1.15fr; gap:9%; }
+    h2 { margin:15px 0 0; font:600 clamp(2.35rem,4.3vw,4.2rem)/1 "Playfair Display",Georgia,serif; letter-spacing:-.05em; }
+    .intro-copy { font-size:1.18rem; line-height:1.72; color:#354b49; padding-top:11px; }
+    .intro-copy p:first-child { margin-top:0; }
+    .intro-copy p + p { color:var(--muted); font-size:1rem; }
+    .rule { border:0; border-top:1px solid var(--line); margin:76px 0 0; }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); }
+    .metric { min-height:151px; padding:25px 22px 18px 0; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .metric:nth-child(3n) { border-right:0; padding-left:22px; }
+    .metric:nth-child(3n+2) { padding-left:22px; }
+    .metric:nth-last-child(-n+3) { border-bottom:0; }
+    .metric b { display:block; font:600 clamp(2.1rem,3.6vw,3.5rem)/1 "Playfair Display",serif; letter-spacing:-.06em; color:var(--forest); }
+    .metric span { display:block; max-width:125px; margin-top:10px; font-size:.79rem; color:var(--muted); line-height:1.25; }
+
+    /* Statement */
+    .statement { padding:106px 0; background:var(--forest); color:#f9f4e8; }
+    .statement .split { align-items:end; }
+    .statement h2 { color:white; }
+    .statement p { margin:0; font-size:1.12rem; line-height:1.7; color:rgba(255,255,255,.82); }
+    .statement .eyebrow { color:#d4e3a8; }
+
+    /* Image story */
+    .image-story { display:grid; grid-template-columns:1.16fr .84fr; min-height:650px; }
+    .image-story figure { margin:0; }
+    .main-image { min-height:650px; background:url('https://nirahngala.github.io/CapitalAfrica/images/Valley-2.jpg') center/cover; }
+    .story-panel { display:flex; flex-direction:column; justify-content:space-between; padding:76px clamp(28px,6vw,94px); background:var(--sand); }
+    .story-panel p { color:#4f605d; line-height:1.72; max-width:430px; }
+    .story-caption { color:var(--muted); font:400 .69rem/1.5 "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+
+    /* Gallery */
+    .gallery { padding:120px 0; }
+    .gallery-head { margin-bottom:48px; max-width:620px; }
+    .gallery-grid {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      grid-auto-rows:190px;
+      gap:12px;
+    }
+    .g-item {
+      position:relative; overflow:hidden; border-radius:4px; cursor:pointer;
+      background:#ddd;
+    }
+    .g-item img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition:transform .6s cubic-bezier(.25,.8,.25,1);
+    }
+    .g-item:hover img { transform:scale(1.06); }
+    .g-item--lg { grid-column:span 2; grid-row:span 2; }
+    .g-item--wide { grid-column:span 2; }
+    .g-item--tall { grid-row:span 2; }
+    .g-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top,rgba(16,43,43,.72),transparent 55%);
+      display:flex; align-items:flex-end; padding:16px 18px;
+      opacity:0; transition:opacity .3s;
+    }
+    .g-item:hover .g-overlay { opacity:1; }
+    .g-overlay span {
+      color:#fff; font:500 .72rem/1.3 "DM Mono",monospace;
+      letter-spacing:.06em; text-transform:uppercase;
     }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--warm-white);
-      color: var(--charcoal);
-      line-height: 1.6;
+    /* Lightbox */
+    .lightbox {
+      position:fixed; inset:0; z-index:100;
+      background:rgba(8,33,31,.94);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden; transition:all .3s; padding:2rem;
+    }
+    .lightbox.open { opacity:1; visibility:visible; }
+    .lightbox img {
+      max-width:min(1000px,92vw); max-height:76vh;
+      border-radius:6px; object-fit:contain;
+    }
+    .lightbox-cap {
+      color:rgba(255,255,255,.85); margin-top:1.1rem;
+      font:400 .8rem/1.4 "DM Mono",monospace; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .lightbox-x {
+      position:absolute; top:1.4rem; right:1.6rem;
+      background:none; border:0; color:#fff; font-size:2.4rem; cursor:pointer; line-height:1;
     }
 
-    .container { width: min(1140px, 92%); margin: 0 auto; }
-    section { padding: 4.5rem 0; }
+    /* Principles */
+    .principles { padding:120px 0; }
+    .principles-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:53px; }
+    .principles-head p { max-width:425px; margin:0; color:var(--muted); line-height:1.6; }
+    .principle { display:grid; grid-template-columns:70px 1fr 1.45fr; gap:27px; padding:27px 0; border-top:1px solid var(--line); }
+    .principle:last-child { border-bottom:1px solid var(--line); }
+    .principle-no { color:var(--leaf); font:500 .76rem "DM Mono",monospace; }
+    .principle h3 { margin:0; font-size:1.15rem; letter-spacing:-.025em; }
+    .principle p { margin:0; color:var(--muted); font-size:.94rem; line-height:1.55; }
 
-    .section-title {
-      font-size: 1.85rem;
-      font-weight: 700;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
+    /* Why it matters */
+    .matters { padding:110px 0; background:var(--sand); }
+    .matters .split { align-items:center; gap:8%; }
+    .matters p { color:#4f605d; line-height:1.72; margin:0 0 1.1rem; max-width:480px; }
+    .matters p:last-child { margin-bottom:0; }
+    .matters-map {
+      width:100%; max-width:420px; margin:0 auto;
+      transform:rotateX(8deg);
+      filter:drop-shadow(0 18px 30px rgba(16,43,43,.18));
     }
-    .section-sub {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      max-width: 680px;
-      font-size: 1.05rem;
+    .matters-map img { width:100%; height:auto; display:block; }
+
+    /* Closing */
+    .closing {
+      padding:108px 0; color:white;
+      background:linear-gradient(90deg,rgba(10,42,39,.88),rgba(10,42,39,.47)),
+                 url('https://nirahngala.github.io/CapitalAfrica/images/Arabuko-20.jpg') center/cover;
     }
-
-    /* ===== Stats Row ===== */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1.25rem;
-      margin-top: 2.5rem;
+    .closing h2 { max-width:790px; margin-bottom:33px; }
+    .button {
+      display:inline-flex; align-items:center; gap:18px;
+      padding:14px 19px; color:var(--ink); background:#e7f0c9;
+      font-weight:600; font-size:.86rem;
     }
+    .button::after { content:'↗'; font-size:1.15rem; }
 
-    .stat-box {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 1.5rem 1rem;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: all 0.35s ease;
-      border-bottom: 3px solid transparent;
-      opacity: 0;
-      transform: translateY(25px);
+    footer { padding:40px 0; background:#0b2221; color:rgba(255,255,255,.7); font-size:.78rem; }
+    .foot { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+
+    /* Mobile */
+    @media (max-width:900px) {
+      .gallery-grid { grid-template-columns:repeat(2,1fr); grid-auto-rows:170px; }
+      .g-item--lg { grid-column:span 2; grid-row:span 2; }
+      .g-item--wide { grid-column:span 2; }
+      .g-item--tall { grid-row:span 1; }
+      .matters .split { grid-template-columns:1fr; gap:40px; }
     }
-
-    .stat-box.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @media (max-width:700px) {
+      .shell { width:min(100% - 34px,1200px); }
+      .nav { height:72px; }
+      .nav-links { display:none; }
+      .menu { display:block; }
+      .menu[aria-expanded="true"] + .nav-links {
+        position:absolute; display:flex; flex-direction:column; align-items:flex-start;
+        gap:20px; padding:26px; top:72px; left:0; right:0; background:var(--ink);
+      }
+      .hero { min-height:680px; background-position:58% center; }
+      .hero-inner { padding-bottom:44px; }
+      .hero h1 { font-size:4rem; }
+      .hero-copy { font-size:1rem; }
+      .hero-foot { margin-top:48px; font-size:.6rem; gap:22px; }
+      .split, .image-story { grid-template-columns:1fr; gap:35px; }
+      .intro, .principles, .gallery, .matters { padding:78px 0; }
+      .metric { min-height:130px; }
+      .metrics { grid-template-columns:repeat(2,1fr); }
+      .metric:nth-child(3n) { border-right:1px solid var(--line); padding-left:0; }
+      .metric:nth-child(3n+2) { padding-left:18px; border-right:0; }
+      .metric:nth-last-child(-n+3) { border-bottom:1px solid var(--line); }
+      .metric:nth-last-child(-n+2) { border-bottom:0; }
+      .metric:nth-child(5) { padding-left:0; }
+      .metric:nth-child(6) { padding-left:18px; border-right:0; }
+      .statement, .closing { padding:78px 0; }
+      .main-image { min-height:370px; }
+      .story-panel { min-height:390px; padding:55px 26px; }
+      .principles-head { display:block; }
+      .principles-head p { margin-top:22px; }
+      .principle { grid-template-columns:37px 1fr; gap:12px; }
+      .principle p { grid-column:2; }
+      .gallery-grid { grid-template-columns:1fr; grid-auto-rows:220px; }
+      .g-item--lg, .g-item--wide, .g-item--tall { grid-column:span 1; grid-row:span 1; }
+      .foot { align-items:flex-start; flex-direction:column; }
     }
-
-    .stat-box:hover {
-      transform: translateY(-8px);
-      border-bottom-color: var(--copper);
-      box-shadow: 0 14px 32px rgba(18, 63, 70, 0.12);
-    }
-
-    .stat-box .num {
-      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
-      font-weight: 800;
-      color: var(--teal);
-      line-height: 1.1;
-      margin-bottom: 0.35rem;
-    }
-
-    .stat-box .label {
-      font-size: 0.88rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-    /* ===== Creative Gallery – Bento Style ===== */
-.gallery-section {
-  background: var(--warm-white);
-  padding: 5rem 0;
-}
-
-.gallery-bento {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.gallery-item {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  transform: scale(0.96) translateY(20px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.gallery-item.visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.gallery-item:hover img {
-  transform: scale(1.08);
-}
-
-/* Overlay */
-.gallery-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(18, 63, 70, 0.75) 0%,
-    rgba(18, 63, 70, 0.1) 50%,
-    transparent 100%
-  );
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
-}
-
-.gallery-overlay span {
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-
-/* Size variations for bento look */
-.gallery-item--large {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.gallery-item--wide {
-  grid-column: span 2;
-}
-
-.gallery-item--tall {
-  grid-row: span 2;
-}
-
-/* ===== Lightbox ===== */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(18, 63, 70, 0.94);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.35s ease;
-  padding: 2rem;
-}
-
-.lightbox.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.lightbox img {
-  max-width: min(1100px, 92vw);
-  max-height: 78vh;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  object-fit: contain;
-}
-
-.lightbox-caption {
-  color: rgba(255,255,255,0.9);
-  margin-top: 1.25rem;
-  font-size: 1.05rem;
-  font-weight: 500;
-  text-align: center;
-  max-width: 600px;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.75rem;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2.8rem;
-  cursor: pointer;
-  line-height: 1;
-  opacity: 0.85;
-  transition: opacity 0.2s;
-}
-
-.lightbox-close:hover {
-  opacity: 1;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .gallery-bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 180px;
-  }
-  .gallery-item--large {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-  .gallery-item--wide {
-    grid-column: span 2;
-  }
-  .gallery-item--tall {
-    grid-row: span 1;
-  }
-}
-
-@media (max-width: 520px) {
-  .gallery-bento {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 220px;
-  }
-  .gallery-item--large,
-  .gallery-item--wide,
-  .gallery-item--tall {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-}
-
-    /* ===== Lessons Grid ===== */
-    .lessons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .lesson-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 1.6rem 1.5rem;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-      border: 2px solid transparent;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .lesson-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .lesson-card:hover,
-    .lesson-card.expanded {
-      transform: translateY(-7px);
-      box-shadow: 0 16px 36px rgba(18, 63, 70, 0.13);
-      border-color: rgba(198, 106, 50, 0.25);
-    }
-
-    .lesson-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 5px;
-      height: 100%;
-      background: var(--copper);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.35s ease;
-    }
-
-    .lesson-card:hover::before,
-    .lesson-card.expanded::before {
-      transform: scaleY(1);
-    }
-
-    .lesson-card h3 {
-      color: var(--teal);
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      line-height: 1.35;
-    }
-
-    .lesson-card p {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin: 0;
-    }
-
-    .lesson-extra {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: all 0.4s ease;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 0;
-    }
-
-    .lesson-card.expanded .lesson-extra {
-      max-height: 180px;
-      opacity: 1;
-      margin-top: 0.85rem;
-    }
-
-    .expand-hint {
-      display: inline-block;
-      margin-top: 0.8rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--copper);
-      opacity: 0.75;
-    }
-
-    .lesson-card.expanded .expand-hint {
-      display: none;
-    }
-
- /* ===== Why Koromi Matters ===== */
-.koromi-matters {
-  padding: 5rem 0;
-  background: var(--warm-white);
-}
-
-.koromi-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.koromi-text .section-title {
-  margin-bottom: 1.25rem;
-}
-
-.koromi-text p {
-  color: var(--muted);
-  margin-bottom: 1.25rem;
-  line-height: 1.7;
-  max-width: 540px;
-}
-
-.koromi-text p:last-child {
-  margin-bottom: 0;
-}
-
-/* Map container */
-.koromi-map-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1200px;
-}
-
-.koromi-map {
-  width: 100%;
-  max-width: 480px;
-  transform-style: preserve-3d;
-  animation: gentleSwing 9s ease-in-out infinite;
-}
-
-.koromi-map img {
-  width: 100%;
-  height: auto;
-  display: block;
- transform: rotateX(10deg); /* slight tilt for depth */
-}
-
-/* Gentle left-right swing */
-@keyframes gentleSwing {
-  0% {
-    transform: rotateY(-22deg);
-  }
-  50% {
-    transform: rotateY(22deg);
-  }
-  100% {
-    transform: rotateY(-22deg);
-  }
-}
-
-/* Pause on hover so users can inspect the map */
-.koromi-map-wrapper:hover .koromi-map {
-  animation-play-state: paused;
-}
-
-/* ========== Mobile ========== */
-@media (max-width: 900px) {
-  .koromi-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .koromi-map {
-    max-width: 380px;
-    animation-duration: 8s;
-  }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .koromi-map {
-    animation: none;
-  }
-}
   </style>
 </head>
 <body>
-
-<div id="header"></div>
-
-  <!-- Hero -->
-  <section class="page-hero--koromi">
-    <div class="container">
-      <h1 style="color: white;">Koromi Farm</h1>
-      <p style="color: white;">Our dryland forestry proof of concept — practical evidence that commercially relevant forestry, biodiversity conservation and ecological restoration can be combined under dryland conditions in coastal Kenya.</p>
+  <header class="site-head">
+    <div class="shell nav">
+      <a class="brand" href="#top">CAPITAL AFRICA<span>Koromi Farm</span></a>
+      <button class="menu" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#proof">The proof</a>
+        <a href="#gallery">In pictures</a>
+        <a href="#approach">Our approach</a>
+        <a href="#matters">Why it matters</a>
+        <a href="#visit">Partner with us</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- The Site + Stats -->
-  <section>
-    <div class="container">
-      <h2 class="section-title">The Site</h2>
-      <p class="section-sub">Capital Africa began developing Koromi Farm in 2019 as a practical response to a central question: can commercially relevant forestry, biodiversity conservation and ecological restoration be combined under dryland conditions?</p>
-      <p style="color:var(--muted); max-width:720px; margin-bottom:1rem;">
-        The site was developed progressively rather than as a showcase plantation. Capital Africa tested species, planting methods, water systems, nursery quality, spacing, pruning, survival and operational management. This learning function is central to Koromi’s value.
-      </p>
-
-      <div class="stats-row">
-        <div class="stat-box">
-          <div class="num" data-target="60000">0</div>
-          <div class="label">Trees established</div>
-        </div>
-        <div class="stat-box">
-          <div class="num" data-target="25000">0</div>
-          <div class="label">Melia volkensii</div>
-        </div>
-        <div class="stat-box">
-          <div class="num" data-target="60">0</div>
-          <div class="label">Tree species</div>
-        </div>
-        <div class="stat-box">
-          <div class="num" data-target="250">0</div>
-          <div class="label">Bird species</div>
-        </div>
-        <div class="stat-box">
-          <div class="num">~100</div>
-          <div class="label">Managed landscape (ha)</div>
-        </div>
-        <div class="stat-box">
-          <div class="num">2019</div>
-          <div class="label">Development started</div>
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div class="eyebrow">Coastal Kenya · Since 2019</div>
+        <h1>Where dryland forestry becomes possible.</h1>
+        <p class="hero-copy">Koromi Farm is Capital Africa’s living proof point: a working landscape where commercial forestry, ecological restoration and biodiversity move forward together.</p>
+        <div class="hero-foot">
+          <span>Koromi Farm / Kilifi County</span>
+          <a href="#proof">See the evidence ↓</a>
         </div>
       </div>
+    </section>
+
+    <!-- Proof + metrics -->
+    <section class="intro" id="proof">
+      <div class="shell">
+        <div class="split">
+          <div>
+            <div class="eyebrow">The proof point</div>
+            <h2>Not a promise.<br><i>A practiced system.</i></h2>
+          </div>
+          <div class="intro-copy">
+            <p>Capital Africa began developing Koromi Farm in 2019 as a practical response to a central question: can commercially relevant forestry, biodiversity conservation and ecological restoration be combined under dryland conditions?</p>
+            <p>Koromi is where we learn in the conditions that matter: variable rainfall, demanding soils, local seed systems and the long horizon of land stewardship. The site was developed progressively—not as a showcase plantation. Every planting cycle gives better answers on species, water, nursery quality, spacing, pruning, survival and operational management before we scale them beyond the farm.</p>
+          </div>
+        </div>
+        <hr class="rule">
+        <div class="metrics" aria-label="Koromi at a glance">
+          <div class="metric"><b>60k</b><span>Trees established</span></div>
+          <div class="metric"><b>25k</b><span>Melia volkensii</span></div>
+          <div class="metric"><b>60</b><span>Tree species</span></div>
+          <div class="metric"><b>250</b><span>Bird species</span></div>
+          <div class="metric"><b>~100</b><span>Managed hectares</span></div>
+          <div class="metric"><b>2019</b><span>Development began</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statement -->
+    <section class="statement">
+      <div class="shell split">
+        <div>
+          <div class="eyebrow">One landscape</div>
+          <h2>Production and protection are not competing ideas.</h2>
+        </div>
+        <p>At Koromi, productive tree blocks sit within a wider living system of natural vegetation, biodiversity corridors, water infrastructure and enrichment planting. The value is not in a single crop—it is in a landscape designed to endure.</p>
+      </div>
+    </section>
+
+    <!-- Image story -->
+    <section class="image-story" aria-label="Koromi landscape">
+      <figure class="main-image" role="img" aria-label="Koromi's restored dryland landscape"></figure>
+      <div class="story-panel">
+        <div>
+          <div class="eyebrow">Built for reality</div>
+          <h2>Learning has a place.</h2>
+          <p>Koromi makes the complex work visible: protecting young trees, directing scarce water, running nurseries, observing wildlife and making patient operational decisions—season after season.</p>
+        </div>
+        <div class="story-caption">Biodiversity corridors & natural vegetation</div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+      <div class="shell">
+        <div class="gallery-head">
+          <div class="eyebrow">Koromi in pictures</div>
+          <h2>A living laboratory.</h2>
+          <p style="color:var(--muted); margin:18px 0 0; line-height:1.65; max-width:520px;">Dryland forestry, biodiversity and restoration in coastal Kenya—documented in the field.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="g-item g-item--lg" data-cap="Melia volkensii stands under dryland conditions">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/Koromi-10.jpg" alt="Melia stands" loading="lazy">
+            <div class="g-overlay"><span>Melia stands · Dryland forestry</span></div>
+          </div>
+          <div class="g-item" data-cap="Young Melia plantation">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/Koromi-12.jpg" alt="Young Melia" loading="lazy">
+            <div class="g-overlay"><span>Young Melia plantation</span></div>
+          </div>
+          <div class="g-item" data-cap="Nursery production systems">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/IMG_20201231_072831_368%20(1).jpg" alt="Nursery" loading="lazy">
+            <div class="g-overlay"><span>Nursery systems</span></div>
+          </div>
+          <div class="g-item g-item--wide" data-cap="Biodiversity corridors and natural vegetation">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/Valley-2.jpg" alt="Biodiversity" loading="lazy">
+            <div class="g-overlay"><span>Biodiversity & natural vegetation</span></div>
+          </div>
+          <div class="g-item" data-cap="Water infrastructure">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/4988f5c3-b909-4b7f-8230-775dad032bc7.jpeg" alt="Water systems" loading="lazy">
+            <div class="g-overlay"><span>Water management</span></div>
+          </div>
+          <div class="g-item" data-cap="Field operations">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/Working-08.jpg" alt="Operations" loading="lazy">
+            <div class="g-overlay"><span>Field operations</span></div>
+          </div>
+          <div class="g-item g-item--tall" data-cap="Enrichment planting and restoration">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/TREASURE%20TREES.JPG" alt="Restoration" loading="lazy">
+            <div class="g-overlay"><span>Restoration & enrichment</span></div>
+          </div>
+          <div class="g-item" data-cap="Managed landscape overview">
+            <img src="https://nirahngala.github.io/CapitalAfrica/images/Arabuko-20.jpg" alt="Landscape" loading="lazy">
+            <div class="g-overlay"><span>Managed landscape</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-x" aria-label="Close">&times;</button>
+      <img src="" alt="" id="lb-img">
+      <p class="lightbox-cap" id="lb-cap"></p>
     </div>
-  </section>
 
-  <!-- ===== KOROMI IN PICTURES ===== -->
-<section class="gallery-section">
-  <div class="container">
-    <h2 class="section-title">Koromi in Pictures</h2>
-    <p class="section-sub">A living laboratory of dryland forestry, biodiversity and restoration in coastal Kenya.</p>
-
-    <div class="gallery-bento">
-      <!-- Large hero image -->
-      <div class="gallery-item gallery-item--large" data-caption="Melia volkensii stands under dryland conditions">
-        <img src="images/Koromi-10.jpg" alt="Koromi landscape" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Melia stands • Dryland forestry</span>
+    <!-- Principles / lessons (all 7) -->
+    <section class="principles" id="approach">
+      <div class="shell">
+        <div class="principles-head">
+          <div>
+            <div class="eyebrow">What Koromi has taught us</div>
+            <h2>The work behind the outcome.</h2>
+          </div>
+          <p>Practical lessons from the field that cannot be obtained from feasibility studies alone. They guide every larger decision Capital Africa makes.</p>
+        </div>
+        <div>
+          <article class="principle">
+            <span class="principle-no">01</span>
+            <h3>Choose for the site.</h3>
+            <p>Species selection follows the reality of soil, rainfall and water access—not a template. A species that performs well in one dryland environment may fail where conditions differ.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">02</span>
+            <h3>Planting density shapes form and growth.</h3>
+            <p>Higher initial density can improve height growth and stem straightness while creating opportunities for early pole thinnings.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">03</span>
+            <h3>Make water a system.</h3>
+            <p>Storage, pumping, planting season and targeted field distribution must operate as one. Reservoirs and distribution are managed together, not in isolation.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">04</span>
+            <h3>Build quality before scale.</h3>
+            <p>Strong nurseries, root structure, hardening, seed source, capable teams and reliable field operations are the foundation of credible growth.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">05</span>
+            <h3>Early silviculture is essential.</h3>
+            <p>Pruning, thinning, protection and replacement cannot be postponed without affecting timber quality and future value.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">06</span>
+            <h3>Protect the whole landscape.</h3>
+            <p>Conservation and commercial forestry work best as connected parts of the same plan—productive blocks, natural vegetation, enrichment planting and biodiversity areas together.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-no">07</span>
+            <h3>Operational capacity precedes scale.</h3>
+            <p>People, machinery, seed systems, logistics, monitoring and decision-making structures must be in place before large planting targets become credible.</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Medium -->
-      <div class="gallery-item" data-caption="Young Melia plantation">
-        <img src="images/Koromi-12.jpg" alt="Young Melia" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Young Melia plantation</span>
+    <!-- Why Koromi matters -->
+    <section class="matters" id="matters">
+      <div class="shell split">
+        <div>
+          <div class="eyebrow">For partners & investors</div>
+          <h2>Why Koromi matters.</h2>
+          <p>Koromi gives Capital Africa practical knowledge that cannot be obtained from feasibility studies alone. It allows the company to test forestry systems, water solutions, species combinations, restoration methods and monitoring approaches before applying them at larger scale.</p>
+          <p>It demonstrates understanding of the realities of dryland land development: variable rainfall, seedling losses, fire risk, nursery timing, biodiversity trade-offs, maintenance requirements and the need for long-term local management.</p>
+        </div>
+        <div class="matters-map">
+          <img src="https://nirahngala.github.io/CapitalAfrica/images/Kopie_van_CA_-_Landmark_map-removebg-preview.png" alt="Map of Koromi Farm showing landscape and project boundaries">
         </div>
       </div>
+    </section>
 
-      <!-- Medium -->
-      <div class="gallery-item" data-caption="Nursery production">
-        <img src="images/IMG_20201231_072831_368 (1).jpg" alt="Nursery" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Nursery systems</span>
-        </div>
+    <!-- Closing -->
+    <section class="closing" id="visit">
+      <div class="shell">
+        <div class="eyebrow">Capital Africa</div>
+        <h2>Koromi is the starting point for a more resilient African forestry future.</h2>
+        <a class="button" href="https://nirahngala.github.io/CapitalAfrica/">Meet Capital Africa</a>
       </div>
+    </section>
+  </main>
 
-      <!-- Wide -->
-      <div class="gallery-item gallery-item--wide" data-caption="Biodiversity corridors and natural vegetation">
-        <img src="images/Valley-2.jpg" alt="Biodiversity" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Biodiversity & natural vegetation</span>
-        </div>
-      </div>
-
-      <!-- Small -->
-      <div class="gallery-item" data-caption="Water infrastructure">
-        <img src="images/4988f5c3-b909-4b7f-8230-775dad032bc7.jpeg" alt="Water systems" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Water management</span>
-        </div>
-      </div>
-
-      <!-- Small -->
-      <div class="gallery-item" data-caption="Field operations">
-        <img src="images/Working-08.jpg" alt="Operations" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Field operations</span>
-        </div>
-      </div>
-
-      <!-- Tall -->
-      <div class="gallery-item gallery-item--tall" data-caption="Enrichment planting and restoration">
-        <img src="images/TREASURE TREES.JPG" alt="Restoration" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Restoration & enrichment</span>
-        </div>
-      </div>
-
-      <!-- Medium -->
-      <div class="gallery-item" data-caption="Landscape overview">
-        <img src="images/Arabuko-20.jpg" alt="Overview" loading="lazy">
-        <div class="gallery-overlay">
-          <span>Managed landscape</span>
-        </div>
-      </div>
+  <footer>
+    <div class="shell foot">
+      <span>© Capital Africa</span>
+      <span>Koromi Farm · Coastal Kenya</span>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" aria-label="Close">&times;</button>
-  <img src="" alt="" id="lightbox-img">
-  <p class="lightbox-caption" id="lightbox-caption"></p>
-</div>
+  <script>
+    // Mobile menu
+    const button = document.querySelector('.menu');
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', open);
+    });
 
-  <section style="background:var(--white);">
-    <div class="container">
-      <h2 class="section-title">What Koromi Has Taught Us</h2>
-      <p class="section-sub">Practical lessons that cannot be obtained from feasibility studies alone.</p>
-
-      <div class="lessons-grid">
-        <div class="lesson-card">
-          <h3>Species selection must be site-specific</h3>
-          <p>A species that performs well in one dryland environment may fail where soils, rainfall distribution or water access differ.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Planting density affects form and early growth</h3>
-          <p>Higher initial density may improve height growth and stem straightness while creating opportunities for early pole thinnings.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Nursery quality determines field performance</h3>
-          <p>Root structure, hardening, container design, seed source and timing of dispatch materially affect establishment.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Water management is a system</h3>
-          <p>Reservoirs, storage, pumping, field distribution, planting season and targeted watering must work together.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Early silviculture is essential</h3>
-          <p>Pruning, thinning, protection and replacement cannot be postponed without affecting timber quality and future value.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Commercial forestry and conservation can coexist</h3>
-          <p>Productive blocks, natural vegetation, enrichment planting and biodiversity areas can be designed as one landscape.</p>
-        </div>
-        <div class="lesson-card">
-          <h3>Operational capacity must precede scale</h3>
-          <p>People, machinery, seed systems, logistics, monitoring and decision-making structures are needed before large planting targets are credible.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
- <section class="koromi-matters">
-  <div class="container">
-    <div class="koromi-grid">
-      
-      <!-- Text -->
-      <div class="koromi-text">
-        <h2 class="section-title">Why Koromi Matters</h2>
-        <p>Koromi gives Capital Africa practical knowledge that cannot be obtained from feasibility studies alone. It allows the company to test forestry systems, water solutions, species combinations, restoration methods and monitoring approaches before applying them at larger scale.</p>
-        <p>For investors and partners, Koromi demonstrates that Capital Africa understands the realities of dryland land development: variable rainfall, seedling losses, fire risk, nursery timing, biodiversity trade-offs, maintenance requirements and the need for long-term local management.</p>
-      </div>
-
-      <!-- Animated Map -->
-      <div class="koromi-map-wrapper">
-        <div class="koromi-map">
-          <img src="images/Kopie_van_CA_-_Landmark_map-removebg-preview.png" alt="3D topographic map of Koromi showing rivers, roads and project boundaries" />
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
- <div id="footer"></div>
- <script>
-  async function loadPartial(id, url) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(url + ' not found');
-      el.innerHTML = await res.text();
-    } catch (err) {
-      console.error('Could not load partial:', err);
-    }
-  }
-
-  Promise.all([
-    loadPartial('header', 'header.html'),
-    loadPartial('footer', 'footer.html')
-  ]).then(() => {
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    const overlay   = document.getElementById('navOverlay');
-
-    if (!hamburger || !navLinks) {
-      console.error('Menu elements not found – check header.html');
-      return;
-    }
-
-    function toggleMenu() {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.classList.toggle('active');
-      if (overlay) overlay.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
-
-    hamburger.addEventListener('click', toggleMenu);
-    if (overlay) overlay.addEventListener('click', toggleMenu);
-
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (navLinks.classList.contains('open')) toggleMenu();
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-cap');
+    document.querySelectorAll('.g-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = item.dataset.cap || '';
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       });
     });
-
-    // Highlight current page
-    const path = location.pathname.split('/').pop() || 'index.html';
-    navLinks.querySelectorAll('a').forEach(a => {
-      const href = a.getAttribute('href');
-      if (href && href.split('/').pop() === path) {
-        a.classList.add('active');
-      }
-    });
-  });
-</script>
-
- <script>
-  
-    // Scroll animations + counter
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -40px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-
-          // Animate counters
-          const numEl = entry.target.querySelector('.num[data-target]');
-          if (numEl) {
-            const target = +numEl.getAttribute('data-target');
-            const duration = 1600;
-            const start = performance.now();
-
-            const update = (now) => {
-              const progress = Math.min((now - start) / duration, 1);
-              const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-              const current = Math.floor(ease * target);
-              numEl.textContent = current.toLocaleString() + (target >= 1000 ? '+' : '');
-              if (progress < 1) requestAnimationFrame(update);
-            };
-            requestAnimationFrame(update);
-          }
-
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.stat-box, .lesson-card').forEach(el => {
-      observer.observe(el);
-    });
-  
-
-  // Gallery scroll animation
-document.querySelectorAll('.gallery-item').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.08}s`;
-  observer.observe(el);
-});
-
-// Lightbox
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxCaption = document.getElementById('lightbox-caption');
-const closeBtn = document.querySelector('.lightbox-close');
-
-document.querySelectorAll('.gallery-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const img = item.querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = item.dataset.caption || '';
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-closeBtn.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeLightbox();
-});
-
+    function closeLb() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.querySelector('.lightbox-x').addEventListener('click', closeLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
   </script>
 </body>
 </html>

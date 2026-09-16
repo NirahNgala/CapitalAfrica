@@ -7,33 +7,15 @@
   <title>Koromi Farm — Capital Africa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --ink:#102b2b;
-      --forest:#17453e;
-      --leaf:#8ba55b;
-      --ochre:#e8a44a;
-      --sand:#f4f0e8;
-      --paper:#fbfaf7;
-      --line:rgba(16,43,43,.16);
-      --muted:#617170;
-    }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
     body { margin:0; background:var(--paper); color:var(--ink); font-family:"DM Sans",system-ui,sans-serif; }
     a { color:inherit; text-decoration:none; }
     .shell { width:min(1200px, calc(100% - 48px)); margin:auto; }
     .eyebrow { color:var(--leaf); font:500 .73rem/1 "DM Mono",monospace; letter-spacing:.13em; text-transform:uppercase; }
 
     /* Header */
-    .site-head { position:absolute; z-index:3; left:0; right:0; top:0; color:white; }
-    .nav { height:90px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.22); }
-    .brand { font-weight:700; font-size:1.05rem; letter-spacing:-.03em; }
-    .brand span { display:block; font:400 .59rem/1 "DM Mono",monospace; letter-spacing:.11em; text-transform:uppercase; margin-top:5px; opacity:.75; }
-    .nav-links { display:flex; gap:29px; align-items:center; font-size:.85rem; }
-    .nav-links a:hover { color:#dce9cc; }
-    .menu { display:none; padding:8px; font:inherit; color:white; background:none; border:0; }
 
     /* Hero */
     .hero {
@@ -218,19 +200,7 @@
   </style>
 </head>
 <body>
-  <header class="site-head">
-    <div class="shell nav">
-      <a class="brand" href="#top">CAPITAL AFRICA<span>Koromi Farm</span></a>
-      <button class="menu" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#proof">The proof</a>
-        <a href="#gallery">In pictures</a>
-        <a href="#approach">Our approach</a>
-        <a href="#matters">Why it matters</a>
-        <a href="#visit">Partner with us</a>
-      </nav>
-    </div>
-  </header>
+  <div.header id="header"></div>
 
   <main id="top">
     <!-- Hero -->
@@ -422,44 +392,58 @@
     </section>
   </main>
 
-  <footer>
-    <div class="shell foot">
-      <span>© Capital Africa</span>
-      <span>Koromi Farm · Coastal Kenya</span>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu
-    const button = document.querySelector('.menu');
-    button.addEventListener('click', () => {
-      const open = button.getAttribute('aria-expanded') !== 'true';
-      button.setAttribute('aria-expanded', open);
-    });
-
-    // Lightbox
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const lbCap = document.getElementById('lb-cap');
-    document.querySelectorAll('.g-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lbCap.textContent = item.dataset.cap || '';
-        lb.classList.add('open');
-        lb.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    function closeLb() {
-      lb.classList.remove('open');
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+ <div.footer id="footer"></div>
+<script>
+  async function loadPartial(id, url) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(url + ' not found');
+      el.innerHTML = await res.text();
+    } catch (err) {
+      console.error('Could not load partial:', err);
     }
-    document.querySelector('.lightbox-x').addEventListener('click', closeLb);
-    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
-  </script>
+  }
+
+  Promise.all([
+    loadPartial('header', 'header.html'),
+    loadPartial('footer', 'footer.html')
+  ]).then(() => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    const overlay   = document.getElementById('navOverlay');if (!hamburger || !navLinks) {
+  console.error('Menu elements not found – check header.html');
+  return;
+}
+
+function toggleMenu() {
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  if (overlay) overlay.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+if (overlay) overlay.addEventListener('click', toggleMenu);
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (navLinks.classList.contains('open')) toggleMenu();
+  });
+});
+
+// Highlight current page
+const path = location.pathname.split('/').pop() || 'index.html';
+navLinks.querySelectorAll('a').forEach(a => {
+  const href = a.getAttribute('href');
+  if (href && href.split('/').pop() === path) {
+    a.classList.add('active');
+  }
+});  });
+</script>
+
+
 </body>
 </html>
